@@ -3,3 +3,6 @@ SPA de Perfiles Laborales. Desarrollada en Angular+TypeScript, con DB en Mysql. 
 
 # FrontEnd Angular
 Run npm start from Proyecto-Integrador-ARGProg22/Proyecto-Integrador-Profiler-App directory
+
+# BackEnd Express+Mysql
+Run npm start from Proyecto-Integrador-ARGProg22/Backend-Profiler-App directory
