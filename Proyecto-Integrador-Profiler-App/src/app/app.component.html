@@ -70,28 +70,27 @@
     </div>
 
     <div>
-      <p>Complete the form to enable button.</p>
+      <p *ngIf="registrationForm.status!=='VALID'">Complete the form to enable button</p>
       <button type="submit" [disabled]="!registrationForm.valid">
         Register
       </button>
     </div>
   </form>
-</div>
 
-<div>
+
+<div class="inspire">
   <img
     src="https://us.123rf.com/450wm/kubko/kubko1603/kubko160300070/55136826-conjunto-de-personas-c%C3%ADrculo-avatares-las-personas-cabezas-nacionalidad-diferente-en-estilo-plano-ve.jpg"
     alt="Profiler landing image"
-    width="20%"
-  />
+    width="90%"
+    />
+    <p class="slogan">
+      Profiler App <br />
+      Share it, easy 🐱‍🏍
+    </p>
 
-  <p>
-    Profiler App <br />
-    Share it, easy 🐱‍🏍
-  </p>
 </div>
 </div>
-
 <div>
   <iframe
     width="300"
@@ -103,3 +102,8 @@
     allowfullscreen
   ></iframe>
 </div>
+</div>
+<app-footer></app-footer>
+
+
+
