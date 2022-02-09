@@ -10,6 +10,12 @@
         font-weight: normal
         font-style: normal
 
+$my-color: #1E679A
+
+input
+    font-size: medium
+    width: 18rem
+
 p
     font-family: 'alpha'
     color: red
@@ -33,7 +39,7 @@ div.main-container
     display: flex
     justify-content: center
     align-items: center
-    padding-bottom: 30rem
+    padding-bottom: 10rem
 
 div.input-register
     margin: 5px
@@ -42,19 +48,35 @@ div.form-container
     box-shadow: rgba(99, 99, 99, 0.2) 0.5px 12px 12px 0.5px
     display: flex
     text-align: left
-    background-color: white
+    background-color: #f8f8f8e1
     border-radius: 5%
     padding: 1%
     margin-top: 30px
     margin-right: 10px
 
 div.inspire
-    margin-right: 0%
-    padding-left: 25%
+    padding-left: 10%
+    text-align: center
+    img 
+        border-radius: 10%
 
 button
     margin: 2%
     cursor: pointer
+    background-color: $my-color
+    font-family: 'alpha'
+    color: white
+    font-size: large
+    border-color: #9faa9f
+    margin: 3px
+    border-radius: 12px
 
 button:disabled
     cursor: no-drop
+    background-color: $my-color
+    font-family: 'alpha'
+    color: grey
+    font-size: large
+    border-color: #9faa9f
+    margin: 3px
+    border-radius: 12px
