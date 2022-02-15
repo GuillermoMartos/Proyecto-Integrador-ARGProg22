@@ -16,6 +16,7 @@ pool.getConnection((err, conn)=>{
   return;
 })
 
+pool.query.multipleStatements=true
 pool.query = promisify(pool.query)
 
 module.exports=pool
