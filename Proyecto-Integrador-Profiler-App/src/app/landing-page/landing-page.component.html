@@ -1,0 +1,112 @@
+
+<div class="main-container">
+<div class="form-container">
+  <form [formGroup]="registrationForm" (submit)="registerUser()">
+    <div class="input-register">
+      <div>
+        <label for="name">Name</label>
+      </div>
+      <input
+        type="text"
+        id="name"
+        placeholder="your name here..."
+        formControlName="name"
+      />
+    </div>
+
+    <p
+      *ngIf="
+        registrationForm.controls['name'].invalid &&
+        registrationForm.controls['name'].touched
+      "
+    >
+      Please enter name
+    </p>
+
+    <div class="input-register">
+      <div>
+        <label for="email">User e-mail</label>
+      </div>
+
+      <input
+        type="text"
+        id="email"
+        placeholder="your user email here..."
+        formControlName="email"
+      />
+    </div>
+    <p
+      *ngIf="
+        registrationForm.controls['email'].invalid &&
+        registrationForm.controls['email'].touched
+      "
+    >
+      Please enter valid email format
+    </p>
+
+    <div class="input-register">
+      <div>
+        <label for="password">Password</label>
+      </div>
+      <input
+        #input1
+        type="text"
+        id="password"
+        type="password"
+        placeholder="type your password here..."
+        formControlName="password"
+      />
+    </div>
+
+    <div class="input-register">
+      <div>
+        <label for="repeatPassword">Repeat Password</label>
+      </div>
+      <input
+        type="text"
+        #input2
+        type="password"
+        id="repeatPassword"
+        placeholder="confirm password here..."
+        formControlName="repeatPassword"
+      />
+    </div>
+
+    <div>
+      <p *ngIf="registrationForm.status!=='VALID'">Complete the form to enable button</p>
+      <button type="submit" [disabled]="!registrationForm.valid">
+        Register
+      </button>
+    </div>
+  </form>
+
+
+<div class="inspire">
+  <img
+    src="https://us.123rf.com/450wm/kubko/kubko1603/kubko160300070/55136826-conjunto-de-personas-c%C3%ADrculo-avatares-las-personas-cabezas-nacionalidad-diferente-en-estilo-plano-ve.jpg"
+    alt="Profiler landing image"
+    width="100%"
+    />
+    <p class="slogan">
+      Profiler App <br />
+      Share it, easy 🐱‍🏍
+    </p>
+
+</div>
+</div>
+<div>
+  <iframe
+    width="300"
+    height="210"
+    src="https://www.youtube.com/embed/VmHHGME5Qck"
+    title="acá va mi tutorial"
+    frameborder="0"
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+</div>
+
+
+
+

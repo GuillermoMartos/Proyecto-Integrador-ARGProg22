@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpRequestsService } from 'src/services/http-requests.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent implements OnInit {
+  constructor(private http: HttpRequestsService, private route: Router) {}
 
-  constructor(private http: HttpRequestsService) {}
-
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -26,11 +24,11 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('email')?.value,
         this.loginForm.get('password')?.value
       )
-      .subscribe((response) =>{
-        console.log(response)
-        if(response.login) return
-        else return alert(response.message)
-      })
-      this.loginForm.reset()
+      .subscribe((response) => {
+        console.log(response);
+        if (response.login) return this.route.navigate(['/portfolio']);
+        else return alert(response.message);
+      });
+    this.loginForm.reset();
   }
 }

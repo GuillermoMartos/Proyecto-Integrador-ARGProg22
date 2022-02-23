@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+
 
 @Component({
   selector: 'app-portfolio-home',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortfolioHomeComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(  ) {}
+
+  ngOnInit() {
+    
   }
 
 }
