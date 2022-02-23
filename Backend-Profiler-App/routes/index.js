@@ -7,10 +7,13 @@ router.get("/start", (req, res)=>{
     // pool.query()
 })
 
-router.get("/db", async(req, res)=>{
+router.post("/db/login", async(req, res)=>{
+    let {email, password} = req.body
+    console.log(email, password)
     try{
-        const user = await pool.query('SELECT * FROM users')
-        res.json(user);
+        const user = await pool.query(`SELECT * FROM users WHERE email = ${JSON.stringify(email)} AND password = ${JSON.stringify(password)}`)
+        if(user[0]?.email==email) res.json({login:true, user:user})
+        else res.json({login:false, message:"email and password mismatch"})
     }
     catch(err){
         console.log(err)

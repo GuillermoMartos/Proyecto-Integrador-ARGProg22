@@ -38,9 +38,9 @@ export class HttpRequestsService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<User[]> {
+  loginUser(email:string, password:string): Observable<any> {
     return this.http
-      .get<User[]>(this.apiGetUser, this.httpOptions)
+      .post<any>(this.apiGetUser+"/login",{email,password}, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
