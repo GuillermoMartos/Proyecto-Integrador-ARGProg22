@@ -35,7 +35,7 @@ export class AppComponent {
         this.registrationForm.get('password')?.value,
         this.registrationForm.get('name')?.value
       )
-      .subscribe((response) => console.warn(response));
+      .subscribe((response) => alert("user succesfully registered, log in "));
       this.registrationForm.reset()
   }
 }

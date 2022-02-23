@@ -1,0 +1,45 @@
+<div class="nav">
+    <div class="logo">
+      <img
+        class="logo"
+        alt="logo"
+        src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1645227242/APLogo-20-20.png"
+        width="100px"
+      />
+    </div>
+
+    <div class="Log">
+      <form class="form" [formGroup]="loginForm" (submit)="login()">
+        <label>
+          <h4>User e-mail:</h4>
+        </label>
+
+        <input
+          class="input"
+          name="username"
+          value={log.username}
+          id="email"
+          autoComplete="off"
+          formControlName="email"
+        />
+
+        <label>
+          <h4>Password</h4>
+        </label>
+
+        <input
+          class="input"
+          name="password"
+          type="password"
+          id="password"
+          value={log.password}
+          autoComplete="off"
+          formControlName="password"
+        />
+        <button class="btn-log" type="submit">
+          <h4>LOG IN</h4>
+        </button>
+        
+      </form>
+    </div>
+  </div>

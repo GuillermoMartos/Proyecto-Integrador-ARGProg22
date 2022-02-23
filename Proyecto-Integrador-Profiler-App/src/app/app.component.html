@@ -1,3 +1,4 @@
+<app-login></app-login>
 <div class="main-container">
 <div class="form-container">
   <form [formGroup]="registrationForm" (submit)="registerUser()">
@@ -51,6 +52,7 @@
         #input1
         type="text"
         id="password"
+        type="password"
         placeholder="type your password here..."
         formControlName="password"
       />
@@ -63,6 +65,7 @@
       <input
         type="text"
         #input2
+        type="password"
         id="repeatPassword"
         placeholder="confirm password here..."
         formControlName="repeatPassword"
