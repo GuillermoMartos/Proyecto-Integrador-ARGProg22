@@ -1,0 +1,16 @@
+<div class="not-found">
+  <img src="http://i.stack.imgur.com/SBv4T.gif" />
+  <h1>
+    ooops, nothing to see here... <br />
+    url not found!
+  </h1>
+  <!-- poner condición para estar logueado... -->
+  <div *ngIf="2>3; else noLog">
+    <button routerLink="/portfolio">go Home 🏠</button>
+  </div>
+
+  <ng-template #noLog
+    ><button routerLink="">go Home 🏠</button></ng-template
+  >
+</div>
+<div></div>
