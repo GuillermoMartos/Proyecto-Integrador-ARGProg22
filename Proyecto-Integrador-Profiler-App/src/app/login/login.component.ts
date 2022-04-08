@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
 })
-export class LoginComponent implements OnInit {
-  constructor(private http: HttpRequestsService, private route: Router) {}
 
+export class LoginComponent implements OnInit {
+  constructor(private http: HttpRequestsService, private route: Router ) {}
+  user:boolean=false;
   ngOnInit(): void {}
 
   loginForm = new FormGroup({
@@ -25,10 +26,16 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('password')?.value
       )
       .subscribe((response) => {
-        console.log(response);
-        if (response.login) return this.route.navigate(['/portfolio']);
-        else return alert(response.message);
+        if (response){
+          this.user=true;
+          this.http.send.emit(response)
+          return this.route.navigate(['/portfolio']);}
+        else return alert("email or password incorrect, please try again later");
       });
     this.loginForm.reset();
+  }
+
+  logout(){
+    alert("funcion en desarrollo")
   }
 }

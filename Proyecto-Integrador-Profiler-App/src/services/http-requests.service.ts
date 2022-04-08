@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
@@ -12,7 +12,8 @@ import { User } from 'src/app/interfaces';
   providedIn: 'root',
 })
 export class HttpRequestsService {
-  private apiGetUser: string = 'http://localhost:3001/db';
+  @Output() send : EventEmitter<any>= new EventEmitter();
+  private apiGetUser: string = 'http://localhost:8080/';
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -38,14 +39,15 @@ export class HttpRequestsService {
 
   constructor(private http: HttpClient) {}
 
-  loginUser(email:string, password:string): Observable<any> {
-    return this.http
-      .post<any>(this.apiGetUser+"/login",{email,password}, this.httpOptions)
-      .pipe(catchError(this.handleError));
+  loginUser (email:string, password:string): Observable<any> {
+    let user= this.http
+      .post<any>(this.apiGetUser+"user/info/", {email, password}, this.httpOptions)
+      .pipe(catchError(this.handleError));    
+    return user;
   }
 
   signUpUser(email:string, password:string, name:string){
-    return this.http.post(this.apiGetUser, {email, password, name}, this.httpOptions)
+    return this.http.post(this.apiGetUser+"creador", {email, password, name}, this.httpOptions)
     .pipe(catchError(this.handleError))
   }
 

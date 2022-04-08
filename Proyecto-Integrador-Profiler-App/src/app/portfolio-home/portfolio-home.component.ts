@@ -1,4 +1,5 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
+import { HttpRequestsService } from 'src/services/http-requests.service';
 
 
 @Component({
@@ -7,12 +8,19 @@ import { Component, OnInit, } from '@angular/core';
   styleUrls: ['./portfolio-home.component.sass']
 })
 export class PortfolioHomeComponent implements OnInit {
+  @Input()user_logged:any;
 
-
-  constructor(  ) {}
-
-  ngOnInit() {
+  constructor( private http: HttpRequestsService ) {
     
   }
+
+  
+  ngOnInit() {
+    this.http.send.subscribe(data=>{ 
+      this.user_logged=data;
+      })
+  }
+
+ 
 
 }

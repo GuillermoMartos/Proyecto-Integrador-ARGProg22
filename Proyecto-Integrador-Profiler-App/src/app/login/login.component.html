@@ -1,4 +1,4 @@
-<div class="nav">
+<div *ngIf="user==false; else elseBlock" class="nav">
     <div class="logo">
       <img
         class="logo"
@@ -7,9 +7,10 @@
         width="100px"
       />
     </div>
+    
+    <div class="Log" >
 
-    <div class="Log">
-      <form class="form" [formGroup]="loginForm" (submit)="login()">
+      <form  class="form" [formGroup]="loginForm" (submit)="login()">
         <label>
           <h4>User e-mail:</h4>
         </label>
@@ -43,3 +44,25 @@
       </form>
     </div>
   </div>
+
+  <ng-template #elseBlock>
+    <div class="nav">
+      <div class="logo">
+        <img
+          class="logo"
+          alt="logo"
+          src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1645227242/APLogo-20-20.png"
+          width="100px"
+        />
+        </div>
+        <div class="Log" >
+
+          <form  (submit)="logout()">
+            <button class="btn-log" type="submit">
+              <h4>LOG OUT</h4>
+            </button>
+            
+          </form>
+        </div>
+      </div>
+  </ng-template>

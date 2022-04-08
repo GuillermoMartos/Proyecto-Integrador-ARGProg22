@@ -37,7 +37,10 @@ export class LandingPageComponent implements OnInit {
         this.registrationForm.get('password')?.value,
         this.registrationForm.get('name')?.value
       )
-      .subscribe((response) => alert("user succesfully registered, log in "));
+      .subscribe((response) => {
+
+        alert("done, pero quiero poder mnadarme cosas desde la API, con String se rompe el parser")});
+      
       this.registrationForm.reset()
   }
 
