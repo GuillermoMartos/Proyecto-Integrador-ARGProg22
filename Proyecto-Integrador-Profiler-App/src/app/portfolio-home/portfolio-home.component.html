@@ -1,18 +1,37 @@
 
-<h1>WELCOME TO YOUR PORT!</h1>
-<div class="parent-portfolio">
-    <div class="img">
-        <img src={{user_logged.img}} alt="user profile"/>
-    </div>
-<div class="user">
+<div class="no-log"  *ngIf="!user_logged; else other_content">
+
+    <h1>LOGUEATE PIBE!!!!!</h1>
+</div>
+
+<ng-template #other_content class="parent-portfolio">
+   <div class="parent-div">
+       
+    <div class="first-div">
+    <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px" height="100px"/>
     <h1>{{user_logged.name}}</h1>
     <h1>{{user_logged.email}}</h1>
-    <h1>{{user_logged.about}}</h1>
-    <h1>{{user_logged.position}}</h1>
+    <h1 *ngIf="user_logged.position">Position: {{user_logged.position}}</h1>
+    <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
 </div>
-<div class="contact">
-    <h1>{{user_logged.phone}}</h1>
-    <h1>{{user_logged.adress}}</h1>
+<div class="second-div">
+    <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
+    <h1 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h1>
+</div>
+
+<div >
+
+    <app-skill-portfolio></app-skill-portfolio>
+</div>
+<div >
+    <app-job-portfolio></app-job-portfolio>
+</div>
+<div>
+    <app-education-portfolio></app-education-portfolio>
+</div>
+<div >
+    <app-project-portfolio></app-project-portfolio>
 </div>
 
 </div>
+</ng-template>

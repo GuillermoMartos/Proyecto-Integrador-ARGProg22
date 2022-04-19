@@ -29,13 +29,16 @@ export class LoginComponent implements OnInit {
         if (response){
           this.user=true;
           this.http.send.emit(response)
-          return this.route.navigate(['/portfolio']);}
+          sessionStorage.setItem("userIdPortfolio", response.user_id)
+          this.route.navigate(['/portfolio']);}
         else return alert("email or password incorrect, please try again later");
       });
     this.loginForm.reset();
   }
 
   logout(){
-    alert("funcion en desarrollo")
+    sessionStorage.removeItem("userIdPortfolio")
+    this.user=false;
+    return this.route.navigate(['/']);
   }
 }

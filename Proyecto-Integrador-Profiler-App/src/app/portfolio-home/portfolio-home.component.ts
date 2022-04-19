@@ -5,10 +5,10 @@ import { HttpRequestsService } from 'src/services/http-requests.service';
 @Component({
   selector: 'app-portfolio-home',
   templateUrl: './portfolio-home.component.html',
-  styleUrls: ['./portfolio-home.component.sass']
+  styleUrls: ['./portfolio-home.component.css']
 })
 export class PortfolioHomeComponent implements OnInit {
-  @Input()user_logged:any;
+  user_logged:any;
 
   constructor( private http: HttpRequestsService ) {
     
@@ -20,6 +20,7 @@ export class PortfolioHomeComponent implements OnInit {
       this.user_logged=data;
       })
   }
+
 
  
 

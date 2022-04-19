@@ -9,6 +9,10 @@ import { LoginComponent } from './login/login.component';
 import { PortfolioHomeComponent } from './portfolio-home/portfolio-home.component';
 import { PathErrorComponent } from './path-error/path-error.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { EducationPortfolioComponent } from './education-portfolio/education-portfolio.component';
+import { JobPortfolioComponent } from './job-portfolio/job-portfolio.component';
+import { SkillPortfolioComponent } from './skill-portfolio/skill-portfolio.component';
+import { ProjectPortfolioComponent } from './project-portfolio/project-portfolio.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     LoginComponent,
     PortfolioHomeComponent,
     PathErrorComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    EducationPortfolioComponent,
+    JobPortfolioComponent,
+    SkillPortfolioComponent,
+    ProjectPortfolioComponent
   ],
   imports: [
     BrowserModule,

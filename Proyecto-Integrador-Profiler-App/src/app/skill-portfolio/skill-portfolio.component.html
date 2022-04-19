@@ -1,0 +1,87 @@
+<div *ngIf="!new_skill; else btnclose">
+
+    <button class="btn-portfolio" (click)="create()">AGREGAR SKILL 🖍</button>
+</div>
+
+<ng-template #btnclose>
+    <button class="btn-portfolio" (click)="create()">CERRAR ❌</button>
+</ng-template>
+
+<div class="skill-content" *ngIf="new_skill">
+    <form class="form" [formGroup]="skillForm" (submit)="send()">
+        <label>
+            <h4>Title(*):</h4>
+        </label>
+
+        <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+
+        <label>
+            <h4>About:</h4>
+        </label>
+
+
+        <input class="input" name="about_skill" id="about_skill" autoComplete="off" formControlName="about_skill" />
+        
+        <label>
+            <h4>Qualification:</h4>
+        </label>
+        <input class="input" name="qualification"  type="range" id="qualification"  autoComplete="off"
+            formControlName="qualification" />
+        
+        <label>
+            <h4>Type:</h4>
+        </label>
+
+        <input class="input" name="type" id="type" autoComplete="off" formControlName="type" />
+
+        <button class="btn-log" type="submit">
+            <h4>CREATE!</h4>
+        </button>
+
+    </form>
+</div>
+
+<div class="skill-content" *ngFor="let item of skillData">
+    <button class="btn-portfolio" (click)="edit(item.idSkill, item)">Editar 🎨</button>
+    <button class="btn-portfolio" (click)="erase(item.idSkill)">Quitar 🗑</button>
+
+
+    <div class="edit-education" *ngIf="item.idSkill==editSkill">
+        <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
+        <form class="form" [formGroup]="editableForm" (submit)="update(item.idSkill)">
+            <label>
+                <h4>Title(*):</h4>
+            </label>
+            <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+
+            <label>
+                <h4>Qualification:</h4>
+            </label>
+            <input type="range" name="qualification" id="qualification" autoComplete="off"
+                formControlName="qualification" />
+
+            <label>
+                <h4>Type:</h4>
+            </label>
+            <input class="input" name="type" id="type" autoComplete="off" formControlName="type" />
+
+            <label>
+                <h4>About:</h4>
+            </label>
+            <input class="input" name="about_skill" id="about_skill" autoComplete="off" formControlName="about_skill" />
+
+
+            <button class="btn-log" type="submit">
+                <h4>UPDATE!</h4>
+            </button>
+
+        </form>
+    </div>
+
+
+
+    <h2>{{item.title}}</h2>
+    <h3 *ngIf="item.qualification">Qualification: {{item.qualification}}</h3>
+    <p *ngIf="item.type">Type: {{item.type}}</p>
+    <p *ngIf="item.about_skill"> About: {{item.about_skill}}</p>
+</div>

@@ -6,7 +6,6 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from 'src/app/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -41,8 +40,8 @@ export class HttpRequestsService {
 
   loginUser (email:string, password:string): Observable<any> {
     let user= this.http
-      .post<any>(this.apiGetUser+"user/info/", {email, password}, this.httpOptions)
-      .pipe(catchError(this.handleError));    
+      .post<any>(this.apiGetUser+"user/login/", {email, password}, this.httpOptions)
+      .pipe(catchError(this.handleError));
     return user;
   }
 
