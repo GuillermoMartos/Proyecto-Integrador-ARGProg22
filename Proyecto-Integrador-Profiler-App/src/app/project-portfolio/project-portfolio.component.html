@@ -1,1 +1,95 @@
-<p>project-portfolio works!</p>
+<div *ngIf="!new_project; else btnclose">
+
+    <button class="btn-portfolio" (click)="create()">AGREGAR PROYECTO 🖍</button>
+  </div>
+  
+  <ng-template #btnclose>
+    <button class="btn-portfolio" (click)="create()">CERRAR ❌</button>
+  </ng-template>
+  
+  <div class="skill -content" *ngIf="new_project">
+    <form class="form" [formGroup]="projectForm" (submit)="send()">
+      <label>
+        <h4>Title(*):</h4>
+      </label>
+ 
+      <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+      <label>
+        <h4>Date(*):</h4>
+      </label>
+  
+      <input class="input" name="date" id="date" autoComplete="off" formControlName="date" />
+      <label>
+        <h4>Link(*):</h4>
+      </label>
+  
+      <input class="input" name="linkURL" id="linkURL" autoComplete="off" formControlName="linkURL" />
+
+      <label>
+        <h4>About:</h4>
+      </label>
+
+      <input class="input" name="about_project" id="about_project" autoComplete="off" formControlName="about_project" />
+      <label>
+        <h4>URL image:</h4>
+      </label>
+  
+      <input class="input" name="img" id="img" autoComplete="off"
+        formControlName="img" />
+      <button class="btn-log" type="submit">
+        <h4>CREATE!</h4>
+      </button>
+  
+    </form>
+  </div>
+  
+  
+  <div class="skill-content" *ngFor="let item of projectData">
+    <button class="btn-portfolio" (click)="edit(item.idProject, item)">Editar 🎨</button>
+    <button class="btn-portfolio" (click)="erase(item.idProject)">Quitar 🗑</button>
+  
+  
+    <div class="edit-job" *ngIf="item.idProject==editProject">
+      <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
+      <form class="form" [formGroup]="editableForm" (submit)="update(item.idProject)">
+        <label>
+            <h4>Title(*):</h4>
+          </label>
+     
+          <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+          <label>
+            <h4>Date(*):</h4>
+          </label>
+      
+          <input class="input" name="date" id="date" autoComplete="off" formControlName="date" />
+          <label>
+            <h4>Link(*):</h4>
+          </label>
+      
+          <input class="input" name="linkURL" id="linkURL" autoComplete="off" formControlName="linkURL" />
+    
+          <label>
+            <h4>About:</h4>
+          </label>
+    
+          <input class="input" name="about_project" id="about_project" autoComplete="off" formControlName="about_project" />
+          <label>
+            <h4>URL image:</h4>
+          </label>
+      
+          <input class="input" name="img" id="img" autoComplete="off"
+            formControlName="img" />
+          <button class="btn-log" type="submit">
+            <h4>UPDATE!</h4>
+          </button>
+  
+      </form>
+    </div>
+  
+    <h2>{{item.title}}</h2>
+    <h3>Date: {{item.date}}</h3>
+    <p *ngIf="item.about_job">About: {{item.about_project}}</p>
+    <img *ngIf="item.img" [src]="item.img" alt="job-img" width="100px" height="100px"
+      background-color="black">
+    <p> Link visit: <a href={{item.linkURL}} target="_blank">{{item.linkURL}}</a></p>
+  </div>

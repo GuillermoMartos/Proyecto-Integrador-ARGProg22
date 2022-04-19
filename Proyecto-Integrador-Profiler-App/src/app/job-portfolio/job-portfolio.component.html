@@ -1,1 +1,104 @@
-<p>job-portfolio works!</p>
+<div *ngIf="!new_job; else btnclose">
+
+    <button class="btn-portfolio" (click)="create()">AGREGAR TRABAJO 🖍</button>
+  </div>
+  
+  <ng-template #btnclose>
+    <button class="btn-portfolio" (click)="create()">CERRAR ❌</button>
+  </ng-template>
+  
+  <div class="job-content" *ngIf="new_job">
+    <form class="form" [formGroup]="jobForm" (submit)="send()">
+      <label>
+        <h4>Title(*):</h4>
+      </label>
+ 
+      <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+      <label>
+        <h4>Initial date(*):</h4>
+      </label>
+  
+      <input class="input" name="initial_date" id="initial_date" autoComplete="off" formControlName="initial_date" />
+      <label>
+        <h4>End date:</h4>
+      </label>
+  
+      <input class="input" type="datetime-local" name="end_date" id="end_date" autoComplete="off" formControlName="end_date" />
+      <label>
+        <h4>Company(*):</h4>
+      </label>
+  
+      <input  name="company" id="company" autoComplete="off" formControlName="company" />
+      <label>
+        <h4>About:</h4>
+      </label>
+  
+      <input class="input" name="about_job" id="about_job" autoComplete="off" formControlName="about_job" />
+      <label>
+        <h4>URL image:</h4>
+      </label>
+  
+      <input class="input" name="img" id="img" autoComplete="off"
+        formControlName="img" />
+      <button class="btn-log" type="submit">
+        <h4>CREATE!</h4>
+      </button>
+  
+    </form>
+  </div>
+  
+  
+  <div class="job-content" *ngFor="let item of jobData">
+    <button class="btn-portfolio" (click)="edit(item.idJob, item)">Editar 🎨</button>
+    <button class="btn-portfolio" (click)="erase(item.idJob)">Quitar 🗑</button>
+  
+  
+    <div class="edit-job" *ngIf="item.idJob==editJob">
+      <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
+      <form class="form" [formGroup]="editableForm" (submit)="update(item.idJob)">
+        <label>
+            <h4>Title(*):</h4>
+          </label>
+     
+          <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+          <label>
+            <h4>Initial date(*):</h4>
+          </label>
+      
+          <input class="input" name="initial_date" id="initial_date" autoComplete="off" formControlName="initial_date" />
+          <label>
+            <h4>End date:</h4>
+          </label>
+      
+          <input class="input" type="datetime-local" name="end_date" id="end_date" autoComplete="off" formControlName="end_date" />
+          <label>
+            <h4>Company(*):</h4>
+          </label>
+      
+          <input name="company" id="company" autoComplete="off" formControlName="company" />
+          <label>
+            <h4>About:</h4>
+          </label>
+      
+          <input class="input" name="about_job" id="about_job" autoComplete="off" formControlName="about_job" />
+          <label>
+            <h4>URL image:</h4>
+          </label>
+      
+          <input class="input" name="img" id="img" autoComplete="off"
+            formControlName="img" />
+          <button class="btn-log" type="submit">
+            <h4>UPDATE!</h4>
+          </button>
+  
+      </form>
+    </div>
+  
+    <h2>{{item.title}}</h2>
+    <h3>Company: {{item.company}}</h3>
+    <p *ngIf="item.about_job">About: {{item.about_job}}</p>
+    <img *ngIf="item.img" [src]="item.img" alt="job-img" width="100px" height="100px"
+      background-color="black">
+    <p> Date initial: {{item.initial_date}}</p>
+    <p *ngIf="item.end_date"> Date end: {{item.end_date}}</p>
+  </div>

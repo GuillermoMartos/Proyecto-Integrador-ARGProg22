@@ -14,9 +14,20 @@
     border-color: pink;
     margin: 0 auto;
     display:flex;
+    flex-direction: column;
     background-color:rgba(206, 101, 101, 0.555)
 }
     
 .second-div{
     background-color:rgba(115, 116, 58, 0.555)
+}
+
+img:hover{
+    cursor: pointer;
+    opacity: 0.6;
+    background-color: rgba(121, 43, 194, 0.63);
+}
+
+button{
+    cursor: pointer;
 }

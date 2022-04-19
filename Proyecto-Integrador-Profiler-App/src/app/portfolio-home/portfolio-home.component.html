@@ -1,37 +1,82 @@
-
-<div class="no-log"  *ngIf="!user_logged; else other_content">
+<div class="no-log" *ngIf="!user_logged; else other_content">
 
     <h1>LOGUEATE PIBE!!!!!</h1>
 </div>
 
 <ng-template #other_content class="parent-portfolio">
-   <div class="parent-div">
-       
-    <div class="first-div">
-    <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px" height="100px"/>
-    <h1>{{user_logged.name}}</h1>
-    <h1>{{user_logged.email}}</h1>
-    <h1 *ngIf="user_logged.position">Position: {{user_logged.position}}</h1>
-    <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
-</div>
-<div class="second-div">
-    <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
-    <h1 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h1>
-</div>
+    <div class="parent-div">
+        <div class="first-div">
 
-<div >
 
-    <app-skill-portfolio></app-skill-portfolio>
-</div>
-<div >
-    <app-job-portfolio></app-job-portfolio>
-</div>
-<div>
-    <app-education-portfolio></app-education-portfolio>
-</div>
-<div >
-    <app-project-portfolio></app-project-portfolio>
-</div>
+            <button *ngIf="!user_edit; else btnclose" class="btn-portfolio" (click)="edit()">Editar Perfil 🎨</button>
 
-</div>
+            <ng-template #btnclose>
+                <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
+            </ng-template>
+            <div class="edit-portfolio" *ngIf="user_edit">
+                <form class="form" [formGroup]="portfolioForm" (submit)="edit()">
+                    <label>
+                        <h4>Name(*):</h4>
+                    </label>
+                    <input class="input" name="name" id="name" autoComplete="off" formControlName="name" />
+                    <label>
+                        <h4>E-mail(*):</h4>
+                    </label>
+
+                    <input class="input" type="email" name="email" id="email" autoComplete="off"
+                        formControlName="email" />
+                    <label>
+                        <h4>Position:</h4>
+                    </label>
+
+                    <input class="input" name="position" id="position" autoComplete="off" formControlName="position" />
+
+                    <label>
+                        <h4>Phone:</h4>
+                    </label>
+
+                    <input class="input" name="phone" id="phone" autoComplete="off" formControlName="phone" />
+                    <label>
+                        <h4>About:</h4>
+                    </label>
+
+                    <input class="input" name="about" id="about" autoComplete="off" formControlName="about" />
+                    <label>
+                        <h4>Adress:</h4>
+                    </label>
+
+                    <input class="input" name="adress" id="adress" autoComplete="off" formControlName="adress" />
+                    <button class="btn-log" type="submit">
+                        <h4>Edit!</h4>
+                    </button>
+
+                </form>
+            </div>
+
+            <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px" height="100px" />
+            <h1>{{user_logged.name}}</h1>
+            <h1>{{user_logged.email}}</h1>
+            <h1 *ngIf="user_logged.position">Position: {{user_logged.position}}</h1>
+            <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
+        </div>
+        <div class="second-div">
+            <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
+            <h1 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h1>
+        </div>
+
+        <div>
+
+            <app-skill-portfolio></app-skill-portfolio>
+        </div>
+        <div>
+            <app-job-portfolio></app-job-portfolio>
+        </div>
+        <div>
+            <app-education-portfolio></app-education-portfolio>
+        </div>
+        <div>
+            <app-project-portfolio></app-project-portfolio>
+        </div>
+
+    </div>
 </ng-template>
