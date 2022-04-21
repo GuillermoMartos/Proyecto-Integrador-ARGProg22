@@ -14,12 +14,23 @@ $my-color: #1E679A
 
 input
     font-size: medium
-    width: 18rem
+    width: 20em
+    height: 2em
+    border-style: none
+    border-bottom-style: groove
+    background-color: #d1d1d1
 
 p
     font-family: 'alpha'
     color: red
     font-size: x-small
+    text-align: center
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
 
 label
     font-family: 'alpha'
@@ -31,45 +42,35 @@ p.slogan
     font-family: '3dumbregular'
     font-size: x-large
     font-weight: bolder
-
-div.main-container
-    background-image: url("https://cdn.pixabay.com/photo/2017/09/25/18/56/social-media-2786261_1280.jpg")
-    background-size: 100%
-    background-position: center top
-    display: flex
-    justify-content: center
-    align-items: center
-    padding-bottom: 10rem
+    color: white
 
 div.input-register
-    margin: 5px
+    margin: 0.5em
 
 div.form-container
+    padding-top: 2em
     box-shadow: rgba(99, 99, 99, 0.2) 0.5px 12px 12px 0.5px
     display: flex
     text-align: left
-    background-color: #f8f8f8e1
-    border-radius: 5%
-    padding: 1%
-    margin-top: 30px
-    margin-right: 10px
+    background-color: transparent
+    justify-content: center
+   
 
 div.inspire
-    padding-left: 10%
+    padding:1em
     text-align: center
     img 
-        border-radius: 10%
+        border-radius: 1.5em
 
 button
-    margin: 2%
     cursor: pointer
     background-color: $my-color
     font-family: 'alpha'
     color: white
     font-size: large
     border-color: #9faa9f
-    margin: 3px
-    border-radius: 12px
+    margin: 0.3em
+    border-radius: 1em
 
 button:disabled
     cursor: no-drop
@@ -78,5 +79,7 @@ button:disabled
     color: grey
     font-size: large
     border-color: #9faa9f
-    margin: 3px
-    border-radius: 12px
+    margin: 0.3em
+    border-radius: 1em
+    opacity: 0.7
+

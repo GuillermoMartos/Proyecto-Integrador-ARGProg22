@@ -1,10 +1,10 @@
 <div *ngIf="!new_skill; else btnclose">
 
-    <button class="btn-portfolio" (click)="create()">AGREGAR SKILL 🖍</button>
+    <button class="btn-log" (click)="create()">ADD SKILL 🖍</button>
 </div>
 
 <ng-template #btnclose>
-    <button class="btn-portfolio" (click)="create()">CERRAR ❌</button>
+    <button class="btn-log" (click)="create()">CLOSE ❌</button>
 </ng-template>
 
 <div class="skill-content" *ngIf="new_skill">
@@ -31,23 +31,40 @@
         <label>
             <h4>Type:</h4>
         </label>
-
-        <input class="input" name="type" id="type" autoComplete="off" formControlName="type" />
-
-        <button class="btn-log" type="submit">
+        <select class="input" name="type" id="type" autoComplete="off" formControlName="type">
+        <option selected disabled >choose skill type...</option>    
+        <option value="Soft skill">Soft skill</option>    
+        <option value="Hard skill">Hard skill</option>    
+        </select>
+        <button class="btn-portfolio" type="submit" [disabled]="!skillForm.valid">
             <h4>CREATE!</h4>
         </button>
 
     </form>
 </div>
+<div class="card" *ngFor="let item of skillData">
+    <div class="tools">
+      <div class="circle">
+        <span class="red box"></span>
+      </div>
+      <div class="circle">
+        <span class="yellow box"></span>
+      </div>
+      <div class="circle">
+        <span class="green box"></span>
+      </div>
+      <span class="tool-text">
+        {{item.title}}
+      </span>
+    </div>
+    <div class="card__content" >
+        <div class="card-content">
+    <button class="btn-portfolio" (click)="edit(item.idSkill, item)">Edit 🎨</button>
+    <button class="btn-portfolio" (click)="erase(item.idSkill)">Delete 🗑</button>
 
-<div class="skill-content" *ngFor="let item of skillData">
-    <button class="btn-portfolio" (click)="edit(item.idSkill, item)">Editar 🎨</button>
-    <button class="btn-portfolio" (click)="erase(item.idSkill)">Quitar 🗑</button>
 
-
-    <div class="edit-education" *ngIf="item.idSkill==editSkill">
-        <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
+    <div *ngIf="item.idSkill==editSkill">
+        <button class="btn-portfolio" (click)="close()">Close ❌</button>
         <form class="form" [formGroup]="editableForm" (submit)="update(item.idSkill)">
             <label>
                 <h4>Title(*):</h4>
@@ -63,7 +80,11 @@
             <label>
                 <h4>Type:</h4>
             </label>
-            <input class="input" name="type" id="type" autoComplete="off" formControlName="type" />
+            <select class="input" name="type" id="type" autoComplete="off" formControlName="type">
+                <option selected disabled >choose skill type...</option>    
+                <option value="Soft skill">Soft skill</option>    
+                <option value="Hard skill">Hard skill</option>    
+                </select>
 
             <label>
                 <h4>About:</h4>
@@ -71,17 +92,20 @@
             <input class="input" name="about_skill" id="about_skill" autoComplete="off" formControlName="about_skill" />
 
 
-            <button class="btn-log" type="submit">
+            <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
                 <h4>UPDATE!</h4>
             </button>
 
         </form>
     </div>
-
-
-
-    <h2>{{item.title}}</h2>
-    <h3 *ngIf="item.qualification">Qualification: {{item.qualification}}</h3>
-    <p *ngIf="item.type">Type: {{item.type}}</p>
-    <p *ngIf="item.about_skill"> About: {{item.about_skill}}</p>
+    <div class="card-data">
+        <h2>{{item.title}}</h2>
+        <h3 *ngIf="item.qualification">Qualification: {{item.qualification}}</h3>
+        <div class="pie" style="width: 100px; height: 24px;
+        background: yellowgreen; background-image:
+  linear-gradient(to right, transparent {{item.qualification}}%, #655 0)"></div>
+        <p *ngIf="item.type">Type: {{item.type}}</p>
+        <p *ngIf="item.about_skill"> About: {{item.about_skill}}</p>
+    </div>
+</div>
 </div>

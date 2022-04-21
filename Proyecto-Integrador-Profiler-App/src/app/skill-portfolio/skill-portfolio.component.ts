@@ -55,7 +55,7 @@ export class SkillPortfolioComponent implements OnInit {
 
     await Swal.fire({
       title: 'Creating and posting ⏳',
-      timer: 1000,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()

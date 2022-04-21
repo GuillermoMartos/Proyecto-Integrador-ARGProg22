@@ -1,17 +1,29 @@
 <div class="no-log" *ngIf="!user_logged; else other_content">
 
-    <h1>LOGUEATE PIBE!!!!!</h1>
+    <app-path-error></app-path-error>
 </div>
 
 <ng-template #other_content class="parent-portfolio">
-    <div class="parent-div">
-        <div class="first-div">
+    <div class="banner">
+        <input type="file" id="BtnBrowseHidden" name="files" style="display: none;" />
+        <label class="change_img" for="BtnBrowseHidden" id="LblBrowse">
+            change banner
+        </label>
 
+        <div>
+            <h1> <span>{{user_logged.name}}</span></h1>
+            <h1 *ngIf="user_logged.position"><span>Position: {{user_logged.position}}</span></h1>
+        </div>
+        <img *ngIf="user_logged.img" title="{{user_logged.name}}.img" src={{user_logged.img}} alt="user profile"
+            width="100px" height="100px" />
+    </div>
 
-            <button *ngIf="!user_edit; else btnclose" class="btn-portfolio" (click)="edit()">Editar Perfil 🎨</button>
-
+    <div class="first-div">
+        <div class="base-div">
+            <button style="font-size: 1em;" *ngIf="!user_edit; else btnclose" class="btn-portfolio" (click)="edit()">Edit Profile
+                🎨</button>
             <ng-template #btnclose>
-                <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
+                <button class="btn-portfolio" style="font-size: 1em;" (click)="close()">Cerrar ❌</button>
             </ng-template>
             <div class="edit-portfolio" *ngIf="user_edit">
                 <form class="form" [formGroup]="portfolioForm" (submit)="edit()">
@@ -29,7 +41,8 @@
                         <h4>Position:</h4>
                     </label>
 
-                    <input class="input" name="position" id="position" autoComplete="off" formControlName="position" />
+                    <input class="input" name="position" id="position" autoComplete="off"
+                        formControlName="position" />
 
                     <label>
                         <h4>Phone:</h4>
@@ -46,37 +59,29 @@
                     </label>
 
                     <input class="input" name="adress" id="adress" autoComplete="off" formControlName="adress" />
-                    <button class="btn-log" type="submit">
+                    <button class="btn-portfolio" type="submit">
                         <h4>Edit!</h4>
                     </button>
-
                 </form>
             </div>
 
-            <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px" height="100px" />
-            <h1>{{user_logged.name}}</h1>
-            <h1>{{user_logged.email}}</h1>
-            <h1 *ngIf="user_logged.position">Position: {{user_logged.position}}</h1>
-            <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
+            <div class="info-base">
+                <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px"
+                    height="100px" />
+                <div class="child-info-base">
+                        <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
+                        <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
+                        <h4 style="color:rgb(151, 135, 196)">{{user_logged.email}}</h4>
+                        <h4 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h4>
+                    </div>
+                </div>
+            
         </div>
-        <div class="second-div">
-            <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
-            <h1 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h1>
-        </div>
-
-        <div>
-
-            <app-skill-portfolio></app-skill-portfolio>
-        </div>
-        <div>
-            <app-job-portfolio></app-job-portfolio>
-        </div>
-        <div>
+    <div class="parent-div">
             <app-education-portfolio></app-education-portfolio>
-        </div>
-        <div>
+            <app-job-portfolio></app-job-portfolio>
+            <app-skill-portfolio></app-skill-portfolio>
             <app-project-portfolio></app-project-portfolio>
         </div>
-
     </div>
 </ng-template>

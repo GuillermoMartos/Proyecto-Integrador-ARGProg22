@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateConverterService } from 'src/services/date-converter.service';
 import { ProjectServiceService } from 'src/services/project-service.service';
 import Swal from 'sweetalert2';
 
@@ -15,7 +16,7 @@ export class ProjectPortfolioComponent implements OnInit {
   new_project: boolean = false;
   editProject = 0
 
-  constructor(private projectService: ProjectServiceService) { }
+  constructor(private projectService: ProjectServiceService, private converter:DateConverterService) { }
 
   async ngOnInit(): Promise<void> {
     await this.projectService.obtenerDatosProject(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.projectData = data)
@@ -48,7 +49,7 @@ export class ProjectPortfolioComponent implements OnInit {
   async send() {
     let project = {
       title: this.projectForm.get('title')?.value,
-      date: this.projectForm.get('date')?.value,
+      date: this.converter.convert(this.projectForm.get('date')?.value),
       linkURL: this.projectForm.get('linkURL')?.value,
       about_project: this.projectForm.get('about_project')?.value,
       img: this.projectForm.get('img')?.value,
@@ -61,7 +62,7 @@ export class ProjectPortfolioComponent implements OnInit {
 
     await Swal.fire({
       title: 'Creating and posting ⏳',
-      timer: 1000,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
@@ -78,7 +79,7 @@ export class ProjectPortfolioComponent implements OnInit {
     this.editProject = id
     this.editableForm.setValue({
       title: item.title,
-      date: item?.date,
+      date: this.converter.undoConvert(item?.date),
       linkURL: item?.linkURL,
       about_project: item?.about_project,
       img: item?.img
@@ -94,7 +95,7 @@ export class ProjectPortfolioComponent implements OnInit {
     let update = {
       idProject: data,
       title: this.editableForm.get('title')?.value,
-      date: this.editableForm.get('date')?.value,
+      date: this.converter.convert(this.editableForm.get('date')?.value),
       linkURL: this.editableForm.get('linkURL')?.value,
       about_project: this.editableForm.get('about_project')?.value,
       img: this.editableForm.get('img')?.value,

@@ -1,10 +1,10 @@
 <div *ngIf="!new_edu; else btnclose">
 
-  <button class="btn-portfolio" (click)="create()">AGREGAR EDUCACIÓN 🖍</button>
+  <button class="btn-log" (click)="create()">ADD EDUCATION 🖍</button>
 </div>
 
 <ng-template #btnclose>
-  <button class="btn-portfolio" (click)="create()">CERRAR ❌</button>
+  <button class="btn-log" (click)="create()">CLOSE ❌</button>
 </ng-template>
 
 <div class="edu-content" *ngIf="new_edu">
@@ -23,12 +23,12 @@
       <h4>Date initial(*):</h4>
     </label>
 
-    <input class="input" name="date_initial" id="date_initial" autoComplete="off" formControlName="date_initial" />
+    <input class="input" type="date" name="date_initial" id="date_initial" autoComplete="off" formControlName="date_initial" />
     <label>
       <h4>Date end:</h4>
     </label>
 
-    <input type="datetime-local" name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
+    <input type="date"  name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
     <label>
       <h4>Institution:</h4>
     </label>
@@ -40,66 +40,85 @@
 
     <input class="input" name="img_institution" id="img_institution" autoComplete="off"
       formControlName="img_institution" />
-    <button class="btn-log" type="submit">
+    <button class="btn-portfolio" type="submit" [disabled]="!educationForm.valid">
       <h4>CREATE!</h4>
     </button>
 
   </form>
 </div>
 
-
-<div class="edu-content" *ngFor="let item of eduData">
-  <button class="btn-portfolio" (click)="edit(item.idEducation, item)">Editar 🎨</button>
-  <button class="btn-portfolio" (click)="erase(item.idEducation)">Quitar 🗑</button>
-
-
-  <div class="edit-education" *ngIf="item.idEducation==editEducation">
-    <button class="btn-portfolio" (click)="close()">Cerrar ❌</button>
-    <form class="form" [formGroup]="editableForm" (submit)="update(item.idEducation)">
-      <label>
-        <h4>Title(*):</h4>
-      </label>
-      <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
-
-      <label>
-        <h4>About:</h4>
-      </label>
-      <input class="input" name="about" id="about" autoComplete="off" formControlName="about" />
-
-      <label>
-        <h4>Date initial(*):</h4>
-      </label>
-
-      <input class="input" name="date_initial" id="date_initial" autoComplete="off" formControlName="date_initial" />
-      
-      <label>
-        <h4>Date end:</h4>
-      </label>
-
-      <input class="input" name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
-      <label>
-        <h4>Institution:</h4>
-      </label>
-
-      <input class="input" name="institution" id="institution" autoComplete="off" formControlName="institution" />
-      <label>
-        <h4>URL image:</h4>
-      </label>
-
-      <input class="input" name="img_institution" id="img_institution" autoComplete="off"
-        formControlName="img_institution" />
-      <button class="btn-log" type="submit">
-        <h4>UPDATE!</h4>
-      </button>
-
-    </form>
+<div class="card" *ngFor="let item of eduData">
+  <div class="tools">
+    <div class="circle">
+      <span class="red box"></span>
+    </div>
+    <div class="circle">
+      <span class="yellow box"></span>
+    </div>
+    <div class="circle">
+      <span class="green box"></span>
+    </div>
+    <span class="tool-text">
+      {{item.title}}
+    </span>
   </div>
+  <div class="card__content">
 
-  <h2>{{item.title}}</h2>
-  <h3 *ngIf="item.institution">Institution: {{item.institution}}</h3>
-  <p *ngIf="item.about">About: {{item.about}}</p>
-  <img *ngIf="item.img_institution" [src]="item.img_institution" alt="education-img" width="100px" height="100px"
-    background-color="black">
-  <p> Date initial: {{item.date_initial}}</p>
-  <p *ngIf="item.date_end"> Date end: {{item.date_end}}</p>
-</div>
+    <div class="card-content">
+      <button class="btn-portfolio" (click)="edit(item.idEducation, item)">Edit 🎨</button>
+      <button class="btn-portfolio" (click)="erase(item.idEducation)">Delete 🗑</button>
+
+
+      <div class="edit-education" *ngIf="item.idEducation==editEducation">
+        <button class="btn-portfolio" (click)="close()">Close ❌</button>
+        <form class="form" [formGroup]="editableForm" (submit)="update(item.idEducation)">
+          <label>
+            <h4>Title(*):</h4>
+          </label>
+          <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+
+          <label>
+            <h4>About:</h4>
+          </label>
+          <input class="input" name="about" id="about" autoComplete="off" formControlName="about" />
+
+          <label>
+            <h4>Date initial(*):</h4>
+          </label>
+
+          <input class="input" type="date" name="date_initial" id="date_initial" autoComplete="off"
+            formControlName="date_initial" />
+
+          <label>
+            <h4>Date end:</h4>
+          </label>
+
+          <input class="input"  type="date"  name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
+          <label>
+            <h4>Institution:</h4>
+          </label>
+
+          <input class="input" name="institution" id="institution" autoComplete="off" formControlName="institution" />
+          <label>
+            <h4>URL image:</h4>
+          </label>
+
+          <input class="input" name="img_institution" id="img_institution" autoComplete="off"
+            formControlName="img_institution" />
+          <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
+            <h4>UPDATE!</h4>
+          </button>
+
+        </form>
+      </div>
+      <div class="card-data">
+        <h2>{{item.title}}</h2>
+        <h3 *ngIf="item.institution">Institution: {{item.institution}}</h3>
+        <p *ngIf="item.about">About: {{item.about}}</p>
+        <img *ngIf="item.img_institution" [src]="item.img_institution" alt="education-img" width="100px" height="100px"
+          background-color="black">
+        <p> Date initial: {{item.date_initial}}</p>
+        <p *ngIf="item.date_end"> Date end: {{item.date_end}}</p>
+      </div>
+    </div>
+  </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateConverterService } from 'src/services/date-converter.service';
 import { EducationServiceService } from 'src/services/education-service.service';
 import Swal from "sweetalert2";
 
@@ -13,7 +14,7 @@ export class EducationPortfolioComponent implements OnInit {
   new_edu: boolean = false;
   editEducation = 0
 
-  constructor(private eduService: EducationServiceService) { }
+  constructor(private eduService: EducationServiceService, private converter:DateConverterService) { }
 
   async ngOnInit(): Promise<void> {
     await this.eduService.obtenerDatosEducacion(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.eduData = data)
@@ -39,14 +40,14 @@ export class EducationPortfolioComponent implements OnInit {
 
   create() {
     this.new_edu = !this.new_edu
-
   }
+
 
   async send() {
     let education = {
       title: this.educationForm.get('title')?.value,
-      date_initial: this.educationForm.get('date_initial')?.value,
-      date_end: this.educationForm.get('date_end')?.value,
+      date_initial: this.converter.convert(this.educationForm.get('date_initial')?.value),
+      date_end: this.converter.convert(this.educationForm.get('date_end')?.value),
       img_institution: this.educationForm.get('img_institution')?.value,
       institution: this.educationForm.get('institution')?.value,
       about: this.educationForm.get('about')?.value,
@@ -59,7 +60,7 @@ export class EducationPortfolioComponent implements OnInit {
 
     await Swal.fire({
       title: 'Creating and posting ⏳',
-      timer: 1000,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
@@ -75,8 +76,8 @@ export class EducationPortfolioComponent implements OnInit {
     this.editEducation = id
     this.editableForm.setValue({
       title: item.title,
-      date_initial: item.date_initial,
-      date_end: item?.date_end,
+      date_initial: this.converter.undoConvert(item?.date_initial),
+      date_end: this.converter.undoConvert(item?.date_end),
       img_institution: item?.img_institution,
       institution: item?.institution,
       about: item?.about
@@ -92,8 +93,8 @@ export class EducationPortfolioComponent implements OnInit {
     let update = {
       idEducation: data,
       title: this.editableForm.get('title')?.value,
-      date_initial: this.editableForm.get('date_initial')?.value,
-      date_end: this.editableForm.get('date_end')?.value,
+      date_initial: this.converter.convert(this.editableForm.get('date_initial')?.value),
+      date_end: this.converter.convert(this.editableForm.get('date_end')?.value),
       img_institution: this.editableForm.get('img_institution')?.value,
       institution: this.editableForm.get('institution')?.value,
       about: this.editableForm.get('about')?.value,

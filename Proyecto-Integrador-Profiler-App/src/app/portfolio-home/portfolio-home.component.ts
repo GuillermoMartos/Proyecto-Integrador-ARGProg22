@@ -16,7 +16,7 @@ export class PortfolioHomeComponent implements OnInit {
     
   }
 
-
+  
   portfolioForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),

@@ -4,8 +4,8 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,7 @@ import { catchError } from 'rxjs/operators';
 export class HttpRequestsService {
   @Output() send : EventEmitter<any>= new EventEmitter();
   private apiGetUser: string = 'http://localhost:8080/';
+  currentUser:BehaviorSubject<any>;
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -36,11 +37,17 @@ export class HttpRequestsService {
     }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.currentUser=new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("userIdPortfolio")||"{}"));
+  }
 
   loginUser (email:string, password:string): Observable<any> {
     let user= this.http
-      .post<any>(this.apiGetUser+"user/login/", {email, password}, this.httpOptions)
+      .post<any>(this.apiGetUser+"user/login/", {email, password}, this.httpOptions).pipe(map(data=>{
+        sessionStorage.setItem("userIdPortfolio", JSON.stringify(data));
+        this.currentUser.next(data);
+        return data;
+      }))
       .pipe(catchError(this.handleError));
     return user;
   }
@@ -50,5 +57,8 @@ export class HttpRequestsService {
     .pipe(catchError(this.handleError))
   }
 
+  getcurrentUser(){
+    return this.currentUser.value;
+  }
 
 }

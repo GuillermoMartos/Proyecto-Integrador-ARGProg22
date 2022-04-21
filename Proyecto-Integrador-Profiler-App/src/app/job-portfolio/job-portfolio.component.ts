@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateConverterService } from 'src/services/date-converter.service';
 import { JobServiceService } from 'src/services/job-service.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,7 @@ export class JobPortfolioComponent implements OnInit {
   new_job: boolean = false;
   editJob = 0
 
-  constructor(private jobService: JobServiceService) { }
+  constructor(private jobService: JobServiceService, private converter:DateConverterService) { }
 
   async ngOnInit(): Promise<void> {
     await this.jobService.obtenerDatosJob(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.jobData = data)
@@ -31,7 +32,7 @@ export class JobPortfolioComponent implements OnInit {
 
   editableForm = new FormGroup({
     title: new FormControl(null, [Validators.required]),
-    initial_date: new FormControl(null, Validators.required),
+    initial_date: new FormControl(null, [Validators.required]),
     company: new FormControl(null, Validators.required),
     end_date: new FormControl,
     img: new FormControl,
@@ -46,9 +47,9 @@ export class JobPortfolioComponent implements OnInit {
   async send() {
     let job = {
       title: this.jobForm.get('title')?.value,
-      initial_date: this.jobForm.get('initial_date')?.value,
+      initial_date: this.converter.convert(this.jobForm.get('initial_date')?.value),
       company: this.jobForm.get('company')?.value,
-      end_date: this.jobForm.get('end_date')?.value,
+      end_date: this.converter.convert(this.jobForm.get('end_date')?.value),
       img: this.jobForm.get('img')?.value,
       about_job: this.jobForm.get('about_job')?.value,
       idUser: sessionStorage.getItem("userIdPortfolio")
@@ -60,7 +61,7 @@ export class JobPortfolioComponent implements OnInit {
 
     await Swal.fire({
       title: 'Creating and posting ⏳',
-      timer: 1000,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
@@ -76,9 +77,9 @@ export class JobPortfolioComponent implements OnInit {
     this.editJob = id
     this.editableForm.setValue({
       title: item.title,
-      initial_date: item.initial_date,
+      initial_date: this.converter.undoConvert(item?.initial_date),
       company: item?.company,
-      end_date: item?.end_date,
+      end_date: this.converter.undoConvert(item?.end_date),
       img: item?.img,
       about_job: item?.about_job
     });
@@ -94,9 +95,9 @@ export class JobPortfolioComponent implements OnInit {
     let update = {
       idJob: data,
       title: this.editableForm.get('title')?.value,
-      initial_date: this.editableForm.get('initial_date')?.value,
+      initial_date: this.converter.convert(this.editableForm.get('initial_date')?.value),
       company: this.editableForm.get('company')?.value,
-      end_date: this.editableForm.get('end_date')?.value,
+      end_date: this.converter.convert(this.editableForm.get('end_date')?.value),
       img: this.editableForm.get('img')?.value,
       about_job: this.editableForm.get('about_job')?.value,
       idUser: sessionStorage.getItem("userIdPortfolio")
