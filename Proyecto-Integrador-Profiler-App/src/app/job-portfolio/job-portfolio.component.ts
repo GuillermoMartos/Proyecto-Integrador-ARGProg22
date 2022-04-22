@@ -27,7 +27,7 @@ export class JobPortfolioComponent implements OnInit {
     company: new FormControl(null, Validators.required),
     end_date: new FormControl,
     img: new FormControl,
-    about_job: new FormControl,
+    about_job: new FormControl(null, [Validators.maxLength(255)])
   });
 
   editableForm = new FormGroup({
@@ -36,7 +36,7 @@ export class JobPortfolioComponent implements OnInit {
     company: new FormControl(null, Validators.required),
     end_date: new FormControl,
     img: new FormControl,
-    about_job: new FormControl,
+    about_job: new FormControl(null, [Validators.maxLength(255)])
   });
 
   create() {

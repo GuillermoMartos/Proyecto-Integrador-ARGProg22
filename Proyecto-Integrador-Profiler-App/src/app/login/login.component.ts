@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpRequestsService } from 'src/services/http-requests.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -31,10 +32,13 @@ export class LoginComponent implements OnInit {
           this.http.send.emit(response)
           sessionStorage.setItem("userIdPortfolio", response.user_id)
           this.route.navigate(['/portfolio']);}
-        else return alert("email or password incorrect, please try again later");
+        else{
+          Swal.fire("Email or password incorrect, please try again");
+        }
       });
     this.loginForm.reset();
   }
+  
 
   logout(){
     sessionStorage.removeItem("userIdPortfolio")

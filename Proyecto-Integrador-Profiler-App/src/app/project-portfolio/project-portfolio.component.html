@@ -1,113 +1,145 @@
 <div *ngIf="!new_project; else btnclose">
 
-    <button class="btn-log" (click)="create()">ADD PROJECT 🖍</button>
-  </div>
-  
-  <ng-template #btnclose>
-    <button class="btn-log" (click)="create()">CLOSE ❌</button>
-  </ng-template>
-  
-  <div class="skill -content" *ngIf="new_project">
-    <form class="form" [formGroup]="projectForm" (submit)="send()">
+  <button class="btn-log" (click)="create()">ADD PROJECT 🖍</button>
+</div>
+
+<ng-template #btnclose>
+  <button class="btn-log" (click)="create()">CLOSE ❌</button>
+</ng-template>
+
+<div class="skill -content" *ngIf="new_project">
+  <form class="form" [formGroup]="projectForm" (submit)="send()">
+    <div class="input">
       <label>
         <h4>Title(*):</h4>
       </label>
- 
-      <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+      <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+        formControlName="title"></textarea>
+    </div>
+
+    <div class="input">
       <label>
         <h4>Date(*):</h4>
       </label>
-  
+
       <input class="input" type="date" name="date" id="date" autoComplete="off" formControlName="date" />
+    </div>
+
+    <div class="input">
       <label>
         <h4>Link(*):</h4>
       </label>
-  
-      <input class="input" name="linkURL" id="linkURL" autoComplete="off" formControlName="linkURL" />
+      <textarea class="textarea resize-ta" name="linkURL" id="linkURL" autoComplete="off"
+        formControlName="linkURL"></textarea>
+    </div>
 
-      <label>
-        <h4>About:</h4>
-      </label>
 
-      <input class="input" name="about_project" id="about_project" autoComplete="off" formControlName="about_project" />
+    <div class="input">
+      <div style="line-height: 0.5em;">
+        <label>
+          <h4>About:</h4>
+        </label>
+        <span style="font-size: smaller; color: grey;">(max.255)</span>
+      </div>
+      <textarea class="textarea resize-ta" name="about_project" id="about_project" autoComplete="off"
+        formControlName="about_project"></textarea>
+    </div>
+
+    <div class="input">
       <label>
         <h4>URL image:</h4>
       </label>
-  
-      <input class="input" name="img" id="img" autoComplete="off"
-        formControlName="img" />
-      <button class="btn-portfolio" type="submit" [disabled]="!projectForm.valid">
-        <h4>CREATE!</h4>
-      </button>
-  
-    </form>
-  </div>
-  
-  <div class="card" *ngFor="let item of projectData">
-    <div class="tools">
-      <div class="circle">
-        <span class="red box"></span>
-      </div>
-      <div class="circle">
-        <span class="yellow box"></span>
-      </div>
-      <div class="circle">
-        <span class="green box"></span>
-      </div>
-      <span class="tool-text">
-        {{item.title}}
-      </span>
+      <textarea class="textarea resize-ta" name="img" id="img" autoComplete="off" formControlName="img"></textarea>
     </div>
-    <div class="card__content" >
-      <div class="card-content">
-  
-    <button class="btn-portfolio" (click)="edit(item.idProject, item)">Edit 🎨</button>
-    <button class="btn-portfolio" (click)="erase(item.idProject)">Delete 🗑</button>
-  
-  
-    <div class="edit-job" *ngIf="item.idProject==editProject">
-      <button class="btn-portfolio" (click)="close()">Close ❌</button>
-      <form class="form" [formGroup]="editableForm" (submit)="update(item.idProject)">
-        <label>
-            <h4>Title(*):</h4>
-          </label>
-     
-          <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
-          <label>
-            <h4>Date(*):</h4>
-          </label>
-      
-          <input class="input" type="date" name="date" id="date" autoComplete="off" formControlName="date" />
-          <label>
-            <h4>Link(*):</h4>
-          </label>
-      
-          <input class="input" name="linkURL" id="linkURL" autoComplete="off" formControlName="linkURL" />
-    
-          <label>
-            <h4>About:</h4>
-          </label>
-    
-          <input class="input" name="about_project" id="about_project" autoComplete="off" formControlName="about_project" />
-          <label>
-            <h4>URL image:</h4>
-          </label>
-      
-          <input class="input" name="img" id="img" autoComplete="off"
-            formControlName="img" />
+    <button class="btn-portfolio" type="submit" [disabled]="!projectForm.valid">
+      <h4>CREATE!</h4>
+    </button>
+
+  </form>
+</div>
+
+<div class="card" *ngFor="let item of projectData">
+  <div class="tools">
+    <div class="circle">
+      <span class="red box"></span>
+    </div>
+    <div class="circle">
+      <span class="yellow box"></span>
+    </div>
+    <div class="circle">
+      <span class="green box"></span>
+    </div>
+    <span class="tool-text">
+      {{item.title}}
+    </span>
+  </div>
+  <div class="card__content">
+    <div class="card-content">
+
+      <button class="btn-portfolio" (click)="edit(item.idProject, item)">Edit 🎨</button>
+      <button class="btn-portfolio" (click)="erase(item.idProject)">Delete 🗑</button>
+
+
+      <div class="edit-job" *ngIf="item.idProject==editProject">
+        <form class="form-portfolio" [formGroup]="editableForm" (submit)="update(item.idProject)">
+          <button class="btn-portfolio" (click)="close()">Close ❌</button>
+          <div class="input">
+            <label>
+              <h4>Title(*):</h4>
+            </label>
+            <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+              formControlName="title"></textarea>
+          </div>
+
+          <div class="input">
+            <label>
+              <h4>Date(*):</h4>
+            </label>
+
+            <input class="input" type="date" name="date" id="date" autoComplete="off" formControlName="date" />
+          </div>
+
+          <div class="input">
+            <label>
+              <h4>Link(*):</h4>
+            </label>
+            <textarea class="textarea resize-ta" name="linkURL" id="linkURL" autoComplete="off"
+              formControlName="linkURL"></textarea>
+          </div>
+
+
+          <div class="input">
+            <div style="line-height: 0.5em;">
+              <label>
+                <h4>About:</h4>
+              </label>
+              <span style="font-size: smaller;">{{255-editableForm.get('about_project')?.value.length}}/255</span>
+            </div>
+            <textarea class="textarea resize-ta" name="about_project" id="about_project" autoComplete="off"
+              formControlName="about_project"></textarea>
+          </div>
+
+          <div class="input">
+            <label>
+              <h4>URL image:</h4>
+            </label>
+            <textarea class="textarea resize-ta" name="img" id="img" autoComplete="off"
+              formControlName="img"></textarea>
+          </div>
+
           <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
             <h4>UPDATE!</h4>
           </button>
-  
-      </form>
+
+        </form>
+      </div>
+      <div class="card-data">
+        <h2>{{item.title}}</h2>
+        <h3>Date: {{item.date}}</h3>
+        <p *ngIf="item.about_job">About: {{item.about_project}}</p>
+        <img *ngIf="item.img" [src]="item.img" alt="job-img" width="100px" height="100px" background-color="black">
+        <p> Link visit: <a style="font-family: 'Courier New', Courier, monospace;" href={{item.linkURL}}
+            target="_blank">{{item.linkURL}}</a></p>
+      </div>
     </div>
-    <div class="card-data">
-      <h2>{{item.title}}</h2>
-      <h3>Date: {{item.date}}</h3>
-      <p *ngIf="item.about_job">About: {{item.about_project}}</p>
-      <img *ngIf="item.img" [src]="item.img" alt="job-img" width="100px" height="100px"
-        background-color="black">
-      <p> Link visit: <a style="font-family: 'Courier New', Courier, monospace;" href={{item.linkURL}} target="_blank">{{item.linkURL}}</a></p>
-    </div>
-  </div>
   </div>

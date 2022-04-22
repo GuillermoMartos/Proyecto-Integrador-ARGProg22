@@ -61,4 +61,10 @@ export class HttpRequestsService {
     return this.currentUser.value;
   }
 
+  updatecurrentUser(update:any){
+    return this.http.put<any[]>(this.apiGetUser+"udpate/user", update)
+    .pipe(catchError(this.handleError))
+    
+  }
+
 }

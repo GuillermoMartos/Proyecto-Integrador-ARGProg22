@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpRequestsService } from 'src/services/http-requests.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,6 +10,7 @@ import { HttpRequestsService } from 'src/services/http-requests.service';
 })
 export class LandingPageComponent implements OnInit {
   title = 'Landing-Profiler-App';
+  response:any;
   ngOnInit(): void {
   }
 
@@ -28,7 +30,8 @@ export class LandingPageComponent implements OnInit {
     ){
       this.registrationForm.controls['password'].reset()
       this.registrationForm.controls['repeatPassword'].reset()
-      return alert("Passwords didn't match");
+      Swal.fire("Passwords didn't match");
+      return 
     }
     
     this.http
@@ -38,10 +41,12 @@ export class LandingPageComponent implements OnInit {
         this.registrationForm.get('name')?.value
       )
       .subscribe((response) => {
-
-        alert("done, pero quiero poder mnadarme cosas desde la API, con String se rompe el parser")});
-      
-      this.registrationForm.reset()
+          this.response=response
+          this.registrationForm.reset()
+          if (this.response?.id==1) return Swal.fire("User successfuly registered","please login.");
+          if (this.response?.id==0) return Swal.fire("Email already exist", "please access");
+          return;
+        });
   }
 
 }

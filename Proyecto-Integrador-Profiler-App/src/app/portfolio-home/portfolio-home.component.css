@@ -38,10 +38,8 @@ img:hover{
 .info-base>img{
     align-self: center;
     margin: 2em;
-    border-radius: 50%;
     transform: scale(1.5);
-    transition: "transform 0.25s ease";
-    box-shadow: rgba(37, 37, 41, 0.815) 0px 7px 29px 0px;
+    
 } 
 
 .info-base>img:hover{
@@ -56,12 +54,16 @@ img:hover{
     overflow-y: scroll;
     align-items: center;
 }
-::-webkit-scrollbar {
+
+.banner::-webkit-scrollbar {
     display: none;
 }
 
+
 img{
     margin: 1em;
+    border-radius: 50%;
+    box-shadow: rgba(37, 37, 41, 0.815) 0px 7px 29px 0px;
 }
 
 .change_img {

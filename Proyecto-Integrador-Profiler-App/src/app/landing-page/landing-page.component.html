@@ -11,6 +11,7 @@
         id="name"
         placeholder="your name here..."
         formControlName="name"
+        autocomplete="off"
       />
     </div>
 
@@ -33,6 +34,7 @@
         id="email"
         placeholder="your user email here..."
         formControlName="email"
+        autocomplete="off"
       />
     </div>
     <p
@@ -49,12 +51,12 @@
         <label for="password">Password</label>
       </div>
       <input
-        #input1
         type="text"
         id="password"
         type="password"
         placeholder="type your password here..."
         formControlName="password"
+        autocomplete="off"
       />
     </div>
 
@@ -64,11 +66,11 @@
       </div>
       <input
         type="text"
-        #input2
         type="password"
         id="repeatPassword"
         placeholder="confirm password here..."
         formControlName="repeatPassword"
+        autocomplete="off"
       />
     </div>
       <p *ngIf="registrationForm.status!=='VALID'">Complete the form to enable button</p>

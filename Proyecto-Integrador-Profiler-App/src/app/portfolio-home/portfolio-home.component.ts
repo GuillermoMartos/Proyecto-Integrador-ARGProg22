@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpRequestsService } from 'src/services/http-requests.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -22,8 +23,9 @@ export class PortfolioHomeComponent implements OnInit {
     email: new FormControl(null, [Validators.required, Validators.email]),
     position: new FormControl,
     phone: new FormControl,
-    about: new FormControl,
+    about: new FormControl(null, [Validators.maxLength(255)]),
     adress: new FormControl,
+    password: new FormControl(null, [Validators.required]),
   });
   
   ngOnInit() {
@@ -40,11 +42,45 @@ export class PortfolioHomeComponent implements OnInit {
       position: this.user_logged?.position,
       phone: this.user_logged?.phone,
       about: this.user_logged?.about,
-      adress: this.user_logged?.adress
+      adress: this.user_logged?.adress,
+      password: null
     });
   }
 
   close(){
+    this.user_edit=!this.user_edit
+  }
+
+
+  async update(){
+    let update = {
+      user_id: sessionStorage.getItem("userIdPortfolio"),
+      name: this.portfolioForm.get('name')?.value,
+      position: this.portfolioForm.get('position')?.value,
+      about: this.portfolioForm.get('about')?.value,
+      adress: this.portfolioForm.get('adress')?.value,
+      phone: this.portfolioForm.get('phone')?.value,
+      email: this.portfolioForm.get('email')?.value,
+      password: this.portfolioForm.get('password')?.value,
+      img: this.user_logged.img,
+    }
+
+    if(this.portfolioForm.get('password')?.value!==this.user_logged.password){ 
+      Swal.fire("Password wrong","must access password for user info change");
+      this.portfolioForm.controls['password'].reset()
+      return;
+    }
+    this.http.updatecurrentUser(update).subscribe(data=> console.log(data))
+
+    await Swal.fire({
+      title: 'Updating post... ⏳',
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    })
+    await this.ngOnInit();
     this.user_edit=!this.user_edit
   }
 

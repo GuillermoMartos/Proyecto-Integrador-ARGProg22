@@ -14,7 +14,7 @@
             <h1> <span>{{user_logged.name}}</span></h1>
             <h1 *ngIf="user_logged.position"><span>Position: {{user_logged.position}}</span></h1>
         </div>
-        <img *ngIf="user_logged.img" title="{{user_logged.name}}.img" src={{user_logged.img}} alt="user profile"
+        <img *ngIf="user_logged.img" title="{{user_logged.name}}    " src={{user_logged.img}} alt="user profile"
             width="100px" height="100px" />
     </div>
 
@@ -26,42 +26,67 @@
                 <button class="btn-portfolio" style="font-size: 1em;" (click)="close()">Cerrar ❌</button>
             </ng-template>
             <div class="edit-portfolio" *ngIf="user_edit">
-                <form class="form" [formGroup]="portfolioForm" (submit)="edit()">
-                    <label>
-                        <h4>Name(*):</h4>
-                    </label>
-                    <input class="input" name="name" id="name" autoComplete="off" formControlName="name" />
-                    <label>
-                        <h4>E-mail(*):</h4>
-                    </label>
+                <form class="form-portfolio" [formGroup]="portfolioForm" (submit)="update()">
+                    
+                    <div class="input">
+                        <label>
+                            <h4>Name(*):</h4>
+                        </label>
+                        <textarea class="textarea resize-ta" name="name" id="name" autoComplete="off" formControlName="name"></textarea>
+                      </div>
+                    
+                      <div class="input">
+                          <label>
+                              <h4>E-mail(*):</h4>
+                          </label>
+                        <textarea class="textarea resize-ta" type="email" name="email" id="email" autoComplete="off"
+                        formControlName="email"></textarea>
+                      </div>
 
-                    <input class="input" type="email" name="email" id="email" autoComplete="off"
-                        formControlName="email" />
-                    <label>
-                        <h4>Position:</h4>
-                    </label>
+                      <div class="input">
+                          <label>
+                              <h4>Position:</h4>
+                          </label>
+                        <textarea class="textarea resize-ta" name="position" id="position" autoComplete="off"
+                        formControlName="position"></textarea>
+                      </div>
+                      
 
-                    <input class="input" name="position" id="position" autoComplete="off"
-                        formControlName="position" />
 
-                    <label>
-                        <h4>Phone:</h4>
-                    </label>
+                      <div class="input">
+                          <label>
+                              <h4>Phone:</h4>
+                          </label>
+                        <textarea class="textarea resize-ta" name="phone" id="phone" autoComplete="off" formControlName="phone" ></textarea>
+                      </div>
 
-                    <input class="input" name="phone" id="phone" autoComplete="off" formControlName="phone" />
-                    <label>
-                        <h4>About:</h4>
-                    </label>
+                      <div class="input">
+                        <div style="line-height: 0.5em;">
+                          <label>
+                            <h4>About:</h4>
+                          </label>
+                          <span style="font-size: smaller; color: grey;">(max.255)</span>
+                        </div>
+                        <textarea class="about" name="about" id="about" autoComplete="off"
+                          formControlName="about"></textarea>
+                      </div>
 
-                    <input class="input" name="about" id="about" autoComplete="off" formControlName="about" />
-                    <label>
-                        <h4>Adress:</h4>
-                    </label>
-
-                    <input class="input" name="adress" id="adress" autoComplete="off" formControlName="adress" />
-                    <button class="btn-portfolio" type="submit">
-                        <h4>Edit!</h4>
-                    </button>
+                      <div class="input">
+                          <label>
+                              <h4>Adress:</h4>
+                          </label>
+                        <textarea class="textarea resize-ta" name="adress" id="adress" autoComplete="off" formControlName="adress"></textarea>
+                      </div>
+                   
+                      <div class="input">
+                        <label>
+                            <h4>Password(*):</h4>
+                        </label>
+                        <input type=password name="password" id="password" autoComplete="off" formControlName="password"/>
+                          <button class="btn-portfolio" type="submit" [disabled]="!portfolioForm.valid">
+                              <h4>Edit!</h4>
+                          </button>
+                    </div>
                 </form>
             </div>
 

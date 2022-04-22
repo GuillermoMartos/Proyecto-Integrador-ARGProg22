@@ -8,104 +8,127 @@
 </ng-template>
 
 <div class="skill-content" *ngIf="new_skill">
-    <form class="form" [formGroup]="skillForm" (submit)="send()">
-        <label>
-            <h4>Title(*):</h4>
-        </label>
-
-        <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
-
-        <label>
-            <h4>About:</h4>
-        </label>
-
-
-        <input class="input" name="about_skill" id="about_skill" autoComplete="off" formControlName="about_skill" />
-        
-        <label>
-            <h4>Qualification:</h4>
-        </label>
-        <input class="input" name="qualification"  type="range" id="qualification"  autoComplete="off"
-            formControlName="qualification" />
-        
-        <label>
-            <h4>Type:</h4>
-        </label>
-        <select class="input" name="type" id="type" autoComplete="off" formControlName="type">
-        <option selected disabled >choose skill type...</option>    
-        <option value="Soft skill">Soft skill</option>    
-        <option value="Hard skill">Hard skill</option>    
-        </select>
-        <button class="btn-portfolio" type="submit" [disabled]="!skillForm.valid">
-            <h4>CREATE!</h4>
-        </button>
-
-    </form>
-</div>
-<div class="card" *ngFor="let item of skillData">
-    <div class="tools">
-      <div class="circle">
-        <span class="red box"></span>
-      </div>
-      <div class="circle">
-        <span class="yellow box"></span>
-      </div>
-      <div class="circle">
-        <span class="green box"></span>
-      </div>
-      <span class="tool-text">
-        {{item.title}}
-      </span>
-    </div>
-    <div class="card__content" >
-        <div class="card-content">
-    <button class="btn-portfolio" (click)="edit(item.idSkill, item)">Edit 🎨</button>
-    <button class="btn-portfolio" (click)="erase(item.idSkill)">Delete 🗑</button>
-
-
-    <div *ngIf="item.idSkill==editSkill">
-        <button class="btn-portfolio" (click)="close()">Close ❌</button>
-        <form class="form" [formGroup]="editableForm" (submit)="update(item.idSkill)">
+    <form class="form-portfolio" [formGroup]="skillForm" (submit)="send()">
+        <div class="input">
             <label>
                 <h4>Title(*):</h4>
             </label>
-            <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
+            <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+                formControlName="title"></textarea>
+        </div>
 
+        <div class="input">
             <label>
                 <h4>Qualification:</h4>
             </label>
             <input type="range" name="qualification" id="qualification" autoComplete="off"
                 formControlName="qualification" />
-
             <label>
                 <h4>Type:</h4>
             </label>
             <select class="input" name="type" id="type" autoComplete="off" formControlName="type">
-                <option selected disabled >choose skill type...</option>    
-                <option value="Soft skill">Soft skill</option>    
-                <option value="Hard skill">Hard skill</option>    
-                </select>
-
-            <label>
-                <h4>About:</h4>
-            </label>
-            <input class="input" name="about_skill" id="about_skill" autoComplete="off" formControlName="about_skill" />
+                <option selected disabled>choose skill type...</option>
+                <option value="Soft skill">Soft skill</option>
+                <option value="Hard skill">Hard skill</option>
+            </select>
+        </div>
 
 
-            <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
-                <h4>UPDATE!</h4>
-            </button>
+        <div class="input">
+            <div style="line-height: 0.5em;">
+                <label>
+                    <h4>About:</h4>
+                </label>
+                <span
+                    style="font-size: smaller;">{{255-editableForm.get('about_skill')?.value.length}}/255</span>
+            </div>
+            <textarea class="textarea resize-ta" name="about_skill" id="about_skill" autoComplete="off"
+                formControlName="about_skill"></textarea>
+        </div>
 
-        </form>
+        <button class="btn-portfolio" type="submit" [disabled]="!skillForm.valid">
+            <h4>CREATE!</h4>
+        </button>
+   
+
+    </form>
+</div>
+<div class="card" *ngFor="let item of skillData">
+    <div class="tools">
+        <div class="circle">
+            <span class="red box"></span>
+        </div>
+        <div class="circle">
+            <span class="yellow box"></span>
+        </div>
+        <div class="circle">
+            <span class="green box"></span>
+        </div>
+        <span class="tool-text">
+            {{item.title}}
+        </span>
     </div>
-    <div class="card-data">
-        <h2>{{item.title}}</h2>
-        <h3 *ngIf="item.qualification">Qualification: {{item.qualification}}</h3>
-        <div class="pie" style="width: 100px; height: 24px;
+    <div class="card__content">
+        <div class="card-content">
+            <button class="btn-portfolio" (click)="edit(item.idSkill, item)">Edit 🎨</button>
+            <button class="btn-portfolio" (click)="erase(item.idSkill)">Delete 🗑</button>
+
+
+            <div *ngIf="item.idSkill==editSkill">
+                <form class="form-portfolio" [formGroup]="editableForm" (submit)="update(item.idSkill)">
+                    <button class="btn-portfolio" (click)="close()">Close ❌</button>
+                    <div class="input">
+                        <label>
+                            <h4>Title(*):</h4>
+                        </label>
+                        <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+                            formControlName="title"></textarea>
+                    </div>
+
+                    <div class="input">
+                        <label>
+                            <h4>Qualification:</h4>
+                        </label>
+                        <input type="range" name="qualification" id="qualification" autoComplete="off"
+                            formControlName="qualification" />
+                        <label>
+                            <h4>Type:</h4>
+                        </label>
+                        <select class="input" name="type" id="type" autoComplete="off" formControlName="type">
+                            <option selected disabled>choose skill type...</option>
+                            <option value="Soft skill">Soft skill</option>
+                            <option value="Hard skill">Hard skill</option>
+                        </select>
+                    </div>
+
+
+                    <div class="input">
+                        <div style="line-height: 0.5em;">
+                            <label>
+                                <h4>About:</h4>
+                            </label>
+                            <span
+                                style="font-size: smaller;">{{255-editableForm.get('about_skill')?.value.length}}/255</span>
+                        </div>
+                        <textarea class="textarea resize-ta" name="about_skill" id="about_skill" autoComplete="off"
+                            formControlName="about_skill"></textarea>
+                    </div>
+
+
+                    <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
+                        <h4>UPDATE!</h4>
+                    </button>
+
+                </form>
+            </div>
+            <div class="card-data">
+                <h2>{{item.title}}</h2>
+                <h3 *ngIf="item.qualification">Qualification: {{item.qualification}}</h3>
+                <div class="pie" style="width: 100px; height: 1em;
         background: yellowgreen; background-image:
   linear-gradient(to right, transparent {{item.qualification}}%, #655 0)"></div>
-        <p *ngIf="item.type">Type: {{item.type}}</p>
-        <p *ngIf="item.about_skill"> About: {{item.about_skill}}</p>
+                <p *ngIf="item.type">Type: {{item.type}}</p>
+                <p *ngIf="item.about_skill"> About: {{item.about_skill}}</p>
+            </div>
+        </div>
     </div>
-</div>
-</div>

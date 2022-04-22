@@ -29,7 +29,7 @@ export class ProjectPortfolioComponent implements OnInit {
     date: new FormControl(null, Validators.required),
     linkURL: new FormControl(null, Validators.required),
     img: new FormControl,
-    about_project: new FormControl,
+    about_project: new FormControl(null, [Validators.maxLength(255)])
   });
 
   editableForm = new FormGroup({
@@ -37,7 +37,7 @@ export class ProjectPortfolioComponent implements OnInit {
     date: new FormControl(null, Validators.required),
     linkURL: new FormControl(null, Validators.required),
     img: new FormControl,
-    about_project: new FormControl,
+    about_project: new FormControl(null, [Validators.maxLength(255)])
   });
 
   create() {

@@ -10,3 +10,7 @@
 //   img: any;
 //   password: string;
 // }
+
+// export interface Register{
+//     id:number;
+// }

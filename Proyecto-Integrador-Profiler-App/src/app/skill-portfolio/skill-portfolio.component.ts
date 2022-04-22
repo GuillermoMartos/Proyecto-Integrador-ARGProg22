@@ -24,14 +24,14 @@ export class SkillPortfolioComponent implements OnInit {
     title: new FormControl(null, [Validators.required]),
     qualification: new FormControl,
     type: new FormControl,
-    about_skill: new FormControl,
+    about_skill: new FormControl(null, [Validators.maxLength(255)]),
   });
 
   editableForm = new FormGroup({
     title: new FormControl(null, [Validators.required]),
     qualification: new FormControl,
     type: new FormControl,
-    about_skill: new FormControl,
+    about_skill: new FormControl(null, [Validators.maxLength(255)]),
   });
 
   create() {

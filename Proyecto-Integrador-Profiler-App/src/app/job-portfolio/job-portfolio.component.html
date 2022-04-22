@@ -7,39 +7,51 @@
   <button class="btn-log" (click)="create()">CLOSE ❌</button>
 </ng-template>
 
-<div class="job-content" *ngIf="new_job">
-  <form class="form" [formGroup]="jobForm" (submit)="send()">
-    <label>
-      <h4>Title(*):</h4>
-    </label>
+<div *ngIf="new_job">
+  <form class="form-portfolio" [formGroup]="jobForm" (submit)="send()">
+    <div class="input">
+      <label>
+        <h4>Title(*):</h4>
+      </label>
+      <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+        formControlName="title"></textarea>
+    </div>
 
-    <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
-    <label>
-      <h4>Initial date(*):</h4>
-    </label>
+    <div class="input">
+      <label>
+        <h4>Initial date(*):</h4>
+      </label>
+      <input class="input" class="textarea resize-ta" type="date" name="initial_date" id="initial_date" autoComplete="off"
+        formControlName="initial_date"/>
+      <label>
+        <h4>End date:</h4>
+      </label>
+      <input class="input" type="date" name="end_date" id="end_date" autoComplete="off"
+        formControlName="end_date"/>
+    </div>
 
-    <input class="input" type="date" name="initial_date" id="initial_date" autoComplete="off" formControlName="initial_date" />
-    <label>
-      <h4>End date:</h4>
-    </label>
+    <div class="input">
+      <label>
+        <h4>Company(*):</h4>
+      </label>
+      <textarea class="textarea resize-ta" name="company" id="company" autoComplete="off"
+        formControlName="company"></textarea>
+    </div>
 
-    <input class="input" type="date" name="end_date" id="end_date" autoComplete="off"
-      formControlName="end_date" />
-    <label>
-      <h4>Company(*):</h4>
-    </label>
+    <div class="input">
+      <label>
+        <h4>About:</h4>
+      </label>
+      <textarea class="textarea resize-ta" name="about_job" id="about_job" autoComplete="off"
+        formControlName="about_job"></textarea>
+    </div>
 
-    <input name="company" id="company" autoComplete="off" formControlName="company" />
-    <label>
-      <h4>About:</h4>
-    </label>
-
-    <input class="input" name="about_job" id="about_job" autoComplete="off" formControlName="about_job" />
-    <label>
-      <h4>URL image:</h4>
-    </label>
-
-    <input class="input" name="img" id="img" autoComplete="off" formControlName="img" />
+    <div class="input">
+      <label>
+        <h4>URL image:</h4>
+      </label>
+      <textarea class="textarea resize-ta" name="img" id="img" autoComplete="off" formControlName="img"></textarea>
+    </div>
     <button class="btn-portfolio" type="submit" [disabled]="!jobForm.valid">
       <h4>CREATE!</h4>
     </button>
@@ -64,61 +76,79 @@
       {{item.title}}
     </span>
   </div>
-  <div class="card__content" >
+  <div class="card__content">
     <div class="card-content">
-    <button class="btn-portfolio" (click)="edit(item.idJob, item)">Edit 🎨</button>
-    <button class="btn-portfolio" (click)="erase(item.idJob)">Delete 🗑</button>
-  
-  
-    <div class="edit-job" *ngIf="item.idJob==editJob">
-      <button class="btn-portfolio" (click)="close()">Close ❌</button>
-      <form class="form" [formGroup]="editableForm" (submit)="update(item.idJob)">
-        <label>
-          <h4>Title(*):</h4>
-        </label>
-  
-        <input class="input" name="title" id="title" autoComplete="off" formControlName="title" />
-        <label>
-          <h4>Initial date(*):</h4>
-        </label>
-  
-        <input class="input" type="date" name="initial_date" id="initial_date" autoComplete="off" formControlName="initial_date" required/>
-        <label>
-          <h4>End date:</h4>
-        </label>
-  
-        <input class="input" type="date" name="end_date" id="end_date" autoComplete="off"
-          formControlName="end_date" />
-        <label>
-          <h4>Company(*):</h4>
-        </label>
-  
-        <input name="company" id="company" autoComplete="off" formControlName="company" />
-        <label>
-          <h4>About:</h4>
-        </label>
-  
-        <input class="input" name="about_job" id="about_job" autoComplete="off" formControlName="about_job" />
-        <label>
-          <h4>URL image:</h4>
-        </label>
-  
-        <input class="input" name="img" id="img" autoComplete="off" formControlName="img" />
-        <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
-          <h4>UPDATE!</h4>
-        </button>
-  
-      </form>
-    </div>
-    <div class="card-data">
-      <h2>Job: {{item.title}}</h2>
-      <h3>Company: {{item.company}}</h3>
-      <p *ngIf="item.about_job">About: {{item.about_job}}</p>
-      <img *ngIf="item.img" [src]="item.img" alt="job-img" width="100px" height="100px" background-color="black">
-      <p> Date initial: {{item.initial_date}}</p>
-      <p *ngIf="item.end_date"> Date end: {{item.end_date}}</p>
-    </div>
+      <button class="btn-portfolio" (click)="edit(item.idJob, item)">Edit 🎨</button>
+      <button class="btn-portfolio" (click)="erase(item.idJob)">Delete 🗑</button>
 
-  </div>
+
+      <div class="edit-job" *ngIf="item.idJob==editJob">
+        <form class="form-portfolio" [formGroup]="editableForm" (submit)="update(item.idJob)">
+          <button class="btn-portfolio" (click)="close()">Close ❌</button>
+          <div class="input">
+            <label>
+              <h4>Title(*):</h4>
+            </label>
+            <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+              formControlName="title"></textarea>
+          </div>
+
+          <div class="input">
+            <label>
+              <h4>Initial date(*):</h4>
+            </label>
+            <input class="input" class="textarea resize-ta" type="date" name="initial_date" id="initial_date" autoComplete="off"
+              formControlName="initial_date"/>
+            <label>
+              <h4>End date:</h4>
+            </label>
+            <input class="input" type="date" name="end_date" id="end_date" autoComplete="off"
+              formControlName="end_date"/>
+          </div>
+
+          <div class="input">
+            <label>
+              <h4>Company(*):</h4>
+            </label>
+            <textarea class="textarea resize-ta" name="company" id="company" autoComplete="off"
+              formControlName="company"></textarea>
+          </div>
+
+          <div class="input">
+            <div style="line-height: 0.5em;">
+              <label>
+                <h4>About:</h4>
+              </label>
+              <span style="font-size: smaller;">{{255-editableForm.get('about_job')?.value.length}}/255</span>
+            </div>
+            <textarea class="textarea resize-ta" name="about_job" id="about_job" autoComplete="off"
+              formControlName="about_job"></textarea>
+          </div>
+
+          <div class="input">
+            <label>
+              <h4>URL image:</h4>
+            </label>
+            <textarea class="textarea resize-ta" name="img" id="img" autoComplete="off"
+              formControlName="img"></textarea>
+          </div>
+
+
+          <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
+            <h4>UPDATE!</h4>
+          </button>
+
+        </form>
+      </div>
+      <div class="card-data">
+        <h2>Job: {{item.title}}</h2>
+        <h3>Company: {{item.company}}</h3>
+        <p *ngIf="item.about_job">About: {{item.about_job}}</p>
+        <img *ngIf="item.img" [src]="item.img" alt="job-img" width="100px" height="100px" background-color="black">
+        <p> Date initial: {{item.initial_date}}</p>
+        <p *ngIf="item.end_date"> Date end: {{item.end_date}}</p>
+      </div>
+
+    </div>
   </div>
 </div>

@@ -26,7 +26,7 @@ export class EducationPortfolioComponent implements OnInit {
     date_end: new FormControl,
     img_institution: new FormControl,
     institution: new FormControl,
-    about: new FormControl,
+    about: new FormControl(null, [Validators.maxLength(255)])
   });
 
   editableForm = new FormGroup({
@@ -35,7 +35,7 @@ export class EducationPortfolioComponent implements OnInit {
     date_end: new FormControl,
     img_institution: new FormControl,
     institution: new FormControl,
-    about: new FormControl,
+    about: new FormControl(null, [Validators.maxLength(255)])
   });
 
   create() {
@@ -140,5 +140,4 @@ export class EducationPortfolioComponent implements OnInit {
     })
 
   }
-
 }
