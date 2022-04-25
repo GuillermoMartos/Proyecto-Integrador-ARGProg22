@@ -13,6 +13,14 @@ import { EducationPortfolioComponent } from './education-portfolio/education-por
 import { JobPortfolioComponent } from './job-portfolio/job-portfolio.component';
 import { SkillPortfolioComponent } from './skill-portfolio/skill-portfolio.component';
 import { ProjectPortfolioComponent } from './project-portfolio/project-portfolio.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', component: LandingPageComponent},
+  { path: 'portfolio', component: PortfolioHomeComponent },
+  { path: '**', component: PathErrorComponent},
+];
+
 
 @NgModule({
   declarations: [
@@ -32,7 +40,8 @@ import { ProjectPortfolioComponent } from './project-portfolio/project-portfolio
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

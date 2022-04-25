@@ -45,6 +45,7 @@ export class HttpRequestsService {
     let user= this.http
       .post<any>(this.apiGetUser+"user/login/", {email, password}, this.httpOptions).pipe(map(data=>{
         sessionStorage.setItem("userIdPortfolio", JSON.stringify(data));
+        console.log(data)
         this.currentUser.next(data);
         return data;
       }))

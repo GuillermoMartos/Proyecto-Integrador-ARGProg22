@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpRequestsService } from 'src/services/http-requests.service';
 import Swal from 'sweetalert2';
 
@@ -13,8 +14,8 @@ export class PortfolioHomeComponent implements OnInit {
   user_logged:any;
   user_edit: boolean = false;
 
-  constructor( private http: HttpRequestsService ) {
-    
+  constructor( private http: HttpRequestsService, private router:Router ) {
+    this.user_logged=this.router.getCurrentNavigation()?.extras.state
   }
 
   
@@ -70,16 +71,17 @@ export class PortfolioHomeComponent implements OnInit {
       this.portfolioForm.controls['password'].reset()
       return;
     }
-    this.http.updatecurrentUser(update).subscribe(data=> console.log(data))
+    this.http.updatecurrentUser(update).subscribe()
 
     await Swal.fire({
-      title: 'Updating post... ⏳',
+      title: 'Updating user... ⏳',
       timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
       }
     })
+    this.http.loginUser(this.portfolioForm.get('email')?.value, this.portfolioForm.get('password')?.value).subscribe(response=>this.http.send.emit(response))
     await this.ngOnInit();
     this.user_edit=!this.user_edit
   }

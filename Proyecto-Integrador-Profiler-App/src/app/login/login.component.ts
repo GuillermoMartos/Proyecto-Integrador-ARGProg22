@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
           this.user=true;
           this.http.send.emit(response)
           sessionStorage.setItem("userIdPortfolio", response.user_id)
-          this.route.navigate(['/portfolio']);}
+          this.route.navigate(['/portfolio'], { state: response });
+        }
         else{
           Swal.fire("Email or password incorrect, please try again");
         }
