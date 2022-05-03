@@ -14,6 +14,10 @@ import { JobPortfolioComponent } from './job-portfolio/job-portfolio.component';
 import { SkillPortfolioComponent } from './skill-portfolio/skill-portfolio.component';
 import { ProjectPortfolioComponent } from './project-portfolio/project-portfolio.component';
 import { RouterModule, Routes } from '@angular/router';
+import { VisitorComponentComponent } from './visitor/visitor-component/visitor-component.component';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from "primeng/button";
+import { NoLogComponent } from './no-log/no-log/no-log.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -33,7 +37,9 @@ const routes: Routes = [
     EducationPortfolioComponent,
     JobPortfolioComponent,
     SkillPortfolioComponent,
-    ProjectPortfolioComponent
+    ProjectPortfolioComponent,
+    VisitorComponentComponent,
+    NoLogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,8 @@ const routes: Routes = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    TableModule,
+    ButtonModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

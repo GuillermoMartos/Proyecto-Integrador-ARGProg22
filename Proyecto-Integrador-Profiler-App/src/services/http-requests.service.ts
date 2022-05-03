@@ -54,7 +54,7 @@ export class HttpRequestsService {
   }
 
   signUpUser(email:string, password:string, name:string){
-    return this.http.post(this.apiGetUser+"creador", {email, password, name}, this.httpOptions)
+    return this.http.post(this.apiGetUser+"creador", {email, password, name, img:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"}, this.httpOptions)
     .pipe(catchError(this.handleError))
   }
 
@@ -64,8 +64,17 @@ export class HttpRequestsService {
 
   updatecurrentUser(update:any){
     return this.http.put<any[]>(this.apiGetUser+"udpate/user", update)
+    .pipe(catchError(this.handleError)) 
+  }
+
+  getUserAsVisitor(){
+    return this.http.get<any[]>(this.apiGetUser+"list", this.httpOptions)
+    .pipe(catchError(this.handleError)) 
+  }
+
+  visitProfile(email:string){
+    return this.http.post(this.apiGetUser+"visit", {email}, this.httpOptions)
     .pipe(catchError(this.handleError))
-    
   }
 
 }

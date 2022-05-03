@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpRequestsService } from 'src/services/http-requests.service';
 import Swal from 'sweetalert2';
 
@@ -21,7 +22,7 @@ export class LandingPageComponent implements OnInit {
     repeatPassword: new FormControl(null, Validators.required),
   });
 
-  constructor(private http: HttpRequestsService) {}
+  constructor(private http: HttpRequestsService, private route:Router) {}
 
   registerUser() {
     if (
@@ -47,6 +48,10 @@ export class LandingPageComponent implements OnInit {
           if (this.response?.id==0) return Swal.fire("Email already exist", "please access");
           return;
         });
+  }
+
+  visitor(){
+    this.route.navigate(['/visitor']);
   }
 
 }

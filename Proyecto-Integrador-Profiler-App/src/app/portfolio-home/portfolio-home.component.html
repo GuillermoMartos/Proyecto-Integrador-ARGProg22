@@ -65,7 +65,7 @@
                           <label>
                             <h4>About:</h4>
                           </label>
-                          <span style="font-size: smaller;">{{255-portfolioForm.get('about')?.value.length}}/255</span>
+                          <span *ngIf="portfolioForm.get('about')?.value" style="font-size: smaller;">{{255-portfolioForm.get('about')?.value.length}}/255</span>
                         </div>
                         <textarea class="about" name="about" id="about" autoComplete="off"
                           formControlName="about"></textarea>

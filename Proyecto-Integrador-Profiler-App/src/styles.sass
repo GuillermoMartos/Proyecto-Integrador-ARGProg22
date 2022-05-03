@@ -60,8 +60,16 @@ body
 .btn-log:active 
     transform: translateY(-1px)
 
+button.p-column-filter-menu-button.p-link
+     visibility: hidden
+    
+button.p-column-filter-clear-button.p-link.p-hidden-space
+     visibility: hidden
 
-.card 
+#pr_id_1 > p-paginator > div > button
+    visibility: hidden
+
+.card
     max-width: 50em
     margin: 0.4em auto
     background-color: #011522ec
@@ -201,5 +209,19 @@ form.form-portfolio
     button
         align-self: flex-end
 
+#pr_id_1-table > thead > tr:nth-child(2) > th.no-btn > p-columnfilter > div > button:after
+    content: "❌"
+    font-size: 7px
 
 
+#pr_id_1-table > thead > tr:nth-child(2) > th:nth-child(2) > p-columnfilter > div > button:after
+    content: "❌"
+    font-size: 7px
+
+
+#pr_id_1-table > thead > tr:nth-child(2) > th:nth-child(3) > p-columnfilter > div > button:after
+    content: "❌"
+    font-size: 7px
+
+#pr_id_2 > p-paginator > div > button
+    visibility: hidden

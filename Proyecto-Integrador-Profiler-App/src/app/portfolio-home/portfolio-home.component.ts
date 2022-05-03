@@ -65,6 +65,8 @@ export class PortfolioHomeComponent implements OnInit {
       password: this.portfolioForm.get('password')?.value,
       img: this.user_logged.img,
     }
+    console.log(this.user_logged)
+    console.log(this.portfolioForm.get('password')?.value)
 
     if(this.portfolioForm.get('password')?.value!==this.user_logged.password){ 
       Swal.fire("Password wrong","must access password for user info change");
