@@ -13,7 +13,7 @@ import { catchError, map } from 'rxjs/operators';
 export class HttpRequestsService {
   @Output() send : EventEmitter<any>= new EventEmitter();
   private apiGetUser: string = 'http://localhost:8080/';
-  currentUser:BehaviorSubject<any>;
+  // currentUser:BehaviorSubject<any>;
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -38,7 +38,7 @@ export class HttpRequestsService {
   };
 
   constructor(private http: HttpClient) {
-    this.currentUser=new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("userIdPortfolio")||"{}"));
+    // this.currentUser=new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("userIdPortfolio")||"{}"));
   }
 
   loginUser (email:string, password:string): Observable<any> {
@@ -46,7 +46,7 @@ export class HttpRequestsService {
       .post<any>(this.apiGetUser+"user/login/", {email, password}, this.httpOptions).pipe(map(data=>{
         sessionStorage.setItem("userIdPortfolio", JSON.stringify(data));
         console.log(data)
-        this.currentUser.next(data);
+        // this.currentUser.next(data);
         return data;
       }))
       .pipe(catchError(this.handleError));
@@ -59,7 +59,7 @@ export class HttpRequestsService {
   }
 
   getcurrentUser(){
-    return this.currentUser.value;
+    // return this.currentUser.value;
   }
 
   updatecurrentUser(update:any){

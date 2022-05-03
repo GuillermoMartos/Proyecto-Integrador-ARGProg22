@@ -10,6 +10,7 @@ import { HttpRequestsService } from 'src/services/http-requests.service';
 
 export class NoLogComponent implements OnInit {
   profile:any;
+  loading:boolean=true;
   constructor(private route:ActivatedRoute, private http:HttpRequestsService) { }
 
   ngOnInit(): void {
@@ -18,9 +19,12 @@ export class NoLogComponent implements OnInit {
       this.http.visitProfile(params.get('id')||"").subscribe(data=>{
         this.profile=data;
         delete this.profile?.password;
+        sessionStorage.setItem("userIdPortfolio", this.profile?.user_id||"no-user")
+        this.loading=false;
       })
 
     });
+
 
    
     

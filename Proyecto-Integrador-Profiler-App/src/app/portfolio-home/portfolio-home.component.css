@@ -26,40 +26,6 @@ img:hover{
     background-color: rgba(121, 43, 194, 0.63);
 }
 
-
-
-.info-base{
-    display: flex;
-    line-height: 1em;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.info-base>img{
-    align-self: center;
-    margin: 2em;
-    transform: scale(1.5);
-    
-} 
-
-.info-base>img:hover{
-    opacity: 0.6;
-}
-
-.banner{
-    background-image: url("https://i.pinimg.com/736x/24/fe/60/24fe604f90ee45ff6e36aff709fa0526.jpg");
-    height: 10rem;
-    display: flex;
-    justify-content: space-around;
-    overflow-y: scroll;
-    align-items: center;
-}
-
-.banner::-webkit-scrollbar {
-    display: none;
-}
-
-
 img{
     margin: 1em;
     border-radius: 50%;

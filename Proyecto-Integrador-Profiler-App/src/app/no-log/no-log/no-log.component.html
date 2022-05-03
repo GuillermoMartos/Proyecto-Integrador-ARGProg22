@@ -1,8 +1,45 @@
-<div class="main-visit">
-
-    <h2>hola!</h2>
-    <h2>{{profile?.name}}</h2>
-    <h2>{{profile?.position}}</h2>
-    <h2>{{profile?.email}}</h2>
-
+<div class="loading" *ngIf="loading; else access">
+    <div class="main-visit">
+        CARGANDO...
+    </div>
 </div>
+
+
+<ng-template #access >
+    <div class="load" *ngIf="profile?.name; else error">
+        <div class="main-visit">
+            
+            <div class="banner">
+        
+                <div>
+                    <h1> <span>{{profile.name}}</span></h1>
+                    <h1 *ngIf="profile.position"><span>Position: {{profile.position}}</span></h1>
+                </div>
+                <img *ngIf="profile.img" title="{{profile.name}}" src={{profile.img}} alt="user profile"
+                    width="100px" height="100px" />
+            </div>
+
+            <div class="info-base">
+                <img *ngIf="profile.img" src={{profile.img}} alt="user profile" width="100px" height="100px" />
+                <div class="child-info-base">
+                    <h3 *ngIf="profile.about">About: {{profile.about}}</h3>
+                    <h1 *ngIf="profile.phone">Contact: {{profile.phone}}</h1>
+                    <h4 style="color:rgb(151, 135, 196)">{{profile.email}}</h4>
+                    <h4 *ngIf="profile.adress">Adress: {{profile.adress}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="parent-div">
+            <app-education-portfolio></app-education-portfolio>
+            <app-job-portfolio></app-job-portfolio>
+            <app-skill-portfolio></app-skill-portfolio>
+            <app-project-portfolio></app-project-portfolio>
+        </div>
+    </div>
+
+    <ng-template #error class="error">
+        <app-path-error></app-path-error>
+          
+      </ng-template>
+
+</ng-template>

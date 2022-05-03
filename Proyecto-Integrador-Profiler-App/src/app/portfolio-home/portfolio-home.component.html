@@ -20,89 +20,94 @@
 
     <div class="first-div">
         <div class="base-div">
-            <button style="font-size: 1em;" *ngIf="!user_edit; else btnclose" class="btn-portfolio" (click)="edit()">Edit Profile
+            <button style="font-size: 1em;" *ngIf="!user_edit; else btnclose" class="btn-portfolio"
+                (click)="edit()">Edit Profile
                 🎨</button>
             <ng-template #btnclose>
                 <button class="btn-portfolio" style="font-size: 1em;" (click)="close()">Cerrar ❌</button>
             </ng-template>
             <div class="edit-portfolio" *ngIf="user_edit">
                 <form class="form-portfolio" [formGroup]="portfolioForm" (submit)="update()">
-                    
+
                     <div class="input">
                         <label>
                             <h4>Name(*):</h4>
                         </label>
-                        <textarea class="textarea resize-ta" name="name" id="name" autoComplete="off" formControlName="name" required></textarea>
-                      </div>
-                    
-                      <div class="input">
-                          <label>
-                              <h4>E-mail(*):</h4>
-                          </label>
+                        <textarea class="textarea resize-ta" name="name" id="name" autoComplete="off"
+                            formControlName="name" required></textarea>
+                    </div>
+
+                    <div class="input">
+                        <label>
+                            <h4>E-mail(*):</h4>
+                        </label>
                         <textarea class="textarea resize-ta" type="email" name="email" id="email" autoComplete="off"
-                        formControlName="email" required></textarea>
-                      </div>
+                            formControlName="email" required></textarea>
+                    </div>
 
-                      <div class="input">
-                          <label>
-                              <h4>Position:</h4>
-                          </label>
+                    <div class="input">
+                        <label>
+                            <h4>Position:</h4>
+                        </label>
                         <textarea class="textarea resize-ta" name="position" id="position" autoComplete="off"
-                        formControlName="position"></textarea>
-                      </div>
-                      
+                            formControlName="position"></textarea>
+                    </div>
 
 
-                      <div class="input">
-                          <label>
-                              <h4>Phone:</h4>
-                          </label>
-                        <textarea class="textarea resize-ta" name="phone" id="phone" autoComplete="off" formControlName="phone" ></textarea>
-                      </div>
-                      
-                      <div class="input">
+
+                    <div class="input">
+                        <label>
+                            <h4>Phone:</h4>
+                        </label>
+                        <textarea class="textarea resize-ta" name="phone" id="phone" autoComplete="off"
+                            formControlName="phone"></textarea>
+                    </div>
+
+                    <div class="input">
                         <div style="line-height: 0.5em;">
-                          <label>
-                            <h4>About:</h4>
-                          </label>
-                          <span *ngIf="portfolioForm.get('about')?.value" style="font-size: smaller;">{{255-portfolioForm.get('about')?.value.length}}/255</span>
+                            <label>
+                                <h4>About:</h4>
+                            </label>
+                            <span *ngIf="portfolioForm.get('about')?.value"
+                                style="font-size: smaller;">{{255-portfolioForm.get('about')?.value.length}}/255</span>
                         </div>
                         <textarea class="about" name="about" id="about" autoComplete="off"
-                          formControlName="about"></textarea>
-                      </div>
+                            formControlName="about"></textarea>
+                    </div>
 
-                      <div class="input">
-                          <label>
-                              <h4>Adress:</h4>
-                          </label>
-                        <textarea class="textarea resize-ta" name="adress" id="adress" autoComplete="off" formControlName="adress"></textarea>
-                      </div>
-                   
-                      <div class="input">
+                    <div class="input">
+                        <label>
+                            <h4>Adress:</h4>
+                        </label>
+                        <textarea class="textarea resize-ta" name="adress" id="adress" autoComplete="off"
+                            formControlName="adress"></textarea>
+                    </div>
+
+                    <div class="input">
                         <label>
                             <h4>Password(*):</h4>
                         </label>
-                        <input type=password name="password" id="password" autoComplete="off" formControlName="password" required/>
-                          <button class="btn-portfolio" type="submit" [disabled]="!portfolioForm.valid">
-                              <h4>Edit!</h4>
-                          </button>
-                        </div>
+                        <input type=password name="password" id="password" autoComplete="off" formControlName="password"
+                            required />
+                        <button class="btn-portfolio" type="submit" [disabled]="!portfolioForm.valid">
+                            <h4>Edit!</h4>
+                        </button>
+                    </div>
                 </form>
             </div>
 
             <div class="info-base">
-                <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px"
-                    height="100px" />
+                <img *ngIf="user_logged.img" src={{user_logged.img}} alt="user profile" width="100px" height="100px" />
                 <div class="child-info-base">
-                        <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
-                        <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
-                        <h4 style="color:rgb(151, 135, 196)">{{user_logged.email}}</h4>
-                        <h4 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h4>
-                    </div>
+                    <h3 *ngIf="user_logged.about">About: {{user_logged.about}}</h3>
+                    <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
+                    <h4 style="color:rgb(151, 135, 196)">{{user_logged.email}}</h4>
+                    <h4 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h4>
                 </div>
-            
+            </div>
+
         </div>
-    <div class="parent-div">
+        <div class="parent-div">
             <app-education-portfolio></app-education-portfolio>
             <app-job-portfolio></app-job-portfolio>
             <app-skill-portfolio></app-skill-portfolio>
