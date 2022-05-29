@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DateConverterService } from 'src/services/date-converter.service';
 import { JobServiceService } from 'src/services/job-service.service';
 import Swal from 'sweetalert2';
@@ -14,10 +15,21 @@ export class JobPortfolioComponent implements OnInit {
   jobData!: any[];
   new_job: boolean = false;
   editJob = 0
+  visitor: any = null;
 
-  constructor(private jobService: JobServiceService, private converter:DateConverterService) { }
+
+  constructor(private jobService: JobServiceService, private route: ActivatedRoute, private converter: DateConverterService) { }
 
   async ngOnInit(): Promise<void> {
+    if(sessionStorage.getItem("userIdPortfolio")==null){
+
+      setTimeout(async ()=>{
+        this.jobData= await this.jobService.obtenerDatosJobVisitante()  
+      },3000)
+      
+      this.visitor=true;
+      return
+    }
     await this.jobService.obtenerDatosJob(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.jobData = data)
   }
 
@@ -86,7 +98,7 @@ export class JobPortfolioComponent implements OnInit {
   }
 
 
-  close(){
+  close() {
     this.editJob = 0;
   }
 

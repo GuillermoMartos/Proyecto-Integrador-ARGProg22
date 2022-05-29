@@ -1,6 +1,7 @@
-<div *ngIf="!new_project; else btnclose">
-
-  <button class="btn-log" (click)="create()">ADD PROJECT 🖍</button>
+<div class="check_log" *ngIf="!visitor">
+  <div *ngIf="!new_project; else btnclose">
+    <button class="btn-log" (click)="create()">ADD PROJECT 🖍</button>
+  </div>
 </div>
 
 <ng-template #btnclose>
@@ -69,15 +70,19 @@
     <div class="circle">
       <span class="green box"></span>
     </div>
+    <div class="circle">
+      <span>PROJECT</span>
+    </div>
     <span class="tool-text">
       {{item.title}}
     </span>
   </div>
   <div class="card__content">
     <div class="card-content">
-
-      <button class="btn-portfolio" (click)="edit(item.idProject, item)">Edit 🎨</button>
-      <button class="btn-portfolio" (click)="erase(item.idProject)">Delete 🗑</button>
+      <div class="check_log" *ngIf="!visitor">
+        <button class="btn-portfolio" (click)="edit(item.idProject, item)">Edit 🎨</button>
+        <button class="btn-portfolio" (click)="erase(item.idProject)">Delete 🗑</button>
+      </div>
 
 
       <div class="edit-job" *ngIf="item.idProject==editProject">

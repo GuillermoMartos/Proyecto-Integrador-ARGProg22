@@ -11,8 +11,8 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class HttpRequestsService {
-  @Output() send : EventEmitter<any>= new EventEmitter();
-  private apiGetUser: string = 'http://localhost:8080/';
+  @Output() send: EventEmitter<any> = new EventEmitter();
+  private apiGetUser: string = 'https://warm-depths-51075.herokuapp.com/';
   // currentUser:BehaviorSubject<any>;
 
   private handleError(error: HttpErrorResponse) {
@@ -41,40 +41,39 @@ export class HttpRequestsService {
     // this.currentUser=new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("userIdPortfolio")||"{}"));
   }
 
-  loginUser (email:string, password:string): Observable<any> {
-    let user= this.http
-      .post<any>(this.apiGetUser+"user/login/", {email, password}, this.httpOptions).pipe(map(data=>{
+  loginUser(email: string, password: string): Observable<any> {
+    let user = this.http
+      .post<any>(this.apiGetUser + "user/login/", { email, password }, this.httpOptions).pipe(map(data => {
+        sessionStorage.clear()
         sessionStorage.setItem("userIdPortfolio", JSON.stringify(data));
-        console.log(data)
-        // this.currentUser.next(data);
         return data;
       }))
       .pipe(catchError(this.handleError));
     return user;
   }
 
-  signUpUser(email:string, password:string, name:string){
-    return this.http.post(this.apiGetUser+"creador", {email, password, name, img:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"}, this.httpOptions)
-    .pipe(catchError(this.handleError))
+  signUpUser(email: string, password: string, name: string) {
+    return this.http.post(this.apiGetUser + "creador", { email, password, name, img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" }, this.httpOptions)
+      .pipe(catchError(this.handleError))
   }
 
-  getcurrentUser(){
+  getcurrentUser() {
     // return this.currentUser.value;
   }
 
-  updatecurrentUser(update:any){
-    return this.http.put<any[]>(this.apiGetUser+"udpate/user", update)
-    .pipe(catchError(this.handleError)) 
+  updatecurrentUser(update: any) {
+    return this.http.put<any[]>(this.apiGetUser + "udpate/user", update)
+      .pipe(catchError(this.handleError))
   }
 
-  getUserAsVisitor(){
-    return this.http.get<any[]>(this.apiGetUser+"list", this.httpOptions)
-    .pipe(catchError(this.handleError)) 
+  getUserAsVisitor() {
+    return this.http.get<any[]>(this.apiGetUser + "list", this.httpOptions)
+      .pipe(catchError(this.handleError))
   }
 
-  visitProfile(email:string){
-    return this.http.post(this.apiGetUser+"visit", {email}, this.httpOptions)
-    .pipe(catchError(this.handleError))
+  visitProfile(email: string) {
+    return this.http.post(this.apiGetUser + "visit", { email }, this.httpOptions)
+      .pipe(catchError(this.handleError))
   }
 
 }

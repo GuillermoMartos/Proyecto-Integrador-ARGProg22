@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProjectServiceService {
-  private url="http://localhost:8080/project/info"
+  visitorProjectData:any[]=[];
+  private url="https://warm-depths-51075.herokuapp.com/project/info"
   constructor(private http:HttpClient) { }
 
 obtenerDatosProject(id:number):Observable<any[]>{
@@ -14,14 +15,23 @@ obtenerDatosProject(id:number):Observable<any[]>{
 }
 
 crearDatosProject(project:any):Observable<any[]>{
-  return this.http.post<any[]>("http://localhost:8080/project/create", project);
+  return this.http.post<any[]>("https://warm-depths-51075.herokuapp.com/project/create", project);
 }
 
 eliminarDatoProject(id:number):Observable<any[]>{ 
 
-  return this.http.delete<any[]>("http://localhost:8080/project/erase", {body:id});
+  return this.http.delete<any[]>("https://warm-depths-51075.herokuapp.com/project/erase", {body:id});
 }
+
 editarDatoProject(update:any):Observable<any[]>{
-  return this.http.put<any[]>("http://localhost:8080/project/update", update);
+  return this.http.put<any[]>("https://warm-depths-51075.herokuapp.com/project/update", update);
+}
+
+brindarProjectVisitante(id:number): void {
+  this.http.post<any[]>(this.url, {id:id}).subscribe(data=> this.visitorProjectData= data);
+}
+
+obtenerDatosProjectVisitante():any[]{
+  return this.visitorProjectData
 }
 }

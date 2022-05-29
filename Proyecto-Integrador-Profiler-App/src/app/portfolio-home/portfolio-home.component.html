@@ -5,10 +5,6 @@
 
 <ng-template #other_content class="parent-portfolio">
     <div class="banner">
-        <input type="file" id="BtnBrowseHidden" name="files" style="display: none;" />
-        <label class="change_img" for="BtnBrowseHidden" id="LblBrowse">
-            change banner
-        </label>
 
         <div>
             <h1> <span>{{user_logged.name}}</span></h1>
@@ -17,6 +13,7 @@
         <img *ngIf="user_logged.img" title="{{user_logged.name}}" src={{user_logged.img}} alt="user profile"
             width="100px" height="100px" />
     </div>
+
 
     <div class="first-div">
         <div class="base-div">
@@ -85,6 +82,17 @@
 
                     <div class="input">
                         <label>
+                            <h4>Photo:</h4>
+                        </label>
+                        <textarea class="textarea resize-ta" name="img" id="img" autoComplete="off"
+                            formControlName="img"></textarea>
+                    </div>
+
+                    <img class="photo-viewer" src="{{portfolioForm.get('img')?.value}}" alt="currentphoto" width="100px"
+                        height="100px">
+
+                    <div class="input">
+                        <label>
                             <h4>Password(*):</h4>
                         </label>
                         <input type=password name="password" id="password" autoComplete="off" formControlName="password"
@@ -103,6 +111,7 @@
                     <h1 *ngIf="user_logged.phone">Contact: {{user_logged.phone}}</h1>
                     <h4 style="color:rgb(151, 135, 196)">{{user_logged.email}}</h4>
                     <h4 *ngIf="user_logged.adress">Adress: {{user_logged.adress}}</h4>
+                    <button class="btn-portfolio" (click)="shareLink()">SHARE!</button>
                 </div>
             </div>
 

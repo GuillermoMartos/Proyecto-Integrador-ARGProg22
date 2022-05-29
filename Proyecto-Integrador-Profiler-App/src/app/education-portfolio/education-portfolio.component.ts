@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DateConverterService } from 'src/services/date-converter.service';
 import { EducationServiceService } from 'src/services/education-service.service';
 import Swal from "sweetalert2";
@@ -13,10 +14,31 @@ export class EducationPortfolioComponent implements OnInit {
   eduData!: any[];
   new_edu: boolean = false;
   editEducation = 0
+  visitor:any= null;
+  
 
-  constructor(private eduService: EducationServiceService, private converter:DateConverterService) { }
+  constructor(private eduService: EducationServiceService, private route: ActivatedRoute, private converter: DateConverterService) { }
+
+
 
   async ngOnInit(): Promise<void> {
+    if(sessionStorage.getItem("userIdPortfolio")==null){
+
+      setTimeout(async ()=>{
+        this.eduData= await this.eduService.obtenerDatosEducacionVisitante()  
+      },3000)
+      
+      Swal.fire({
+      title: 'Searching your profile info ⏳',
+      timer: 2200,
+      timerProgressBar: true,
+      didOpen: () => {
+      Swal.showLoading()
+      }})
+      
+      this.visitor=true;
+      return
+    }
     await this.eduService.obtenerDatosEducacion(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.eduData = data)
   }
 
@@ -51,12 +73,11 @@ export class EducationPortfolioComponent implements OnInit {
       img_institution: this.educationForm.get('img_institution')?.value,
       institution: this.educationForm.get('institution')?.value,
       about: this.educationForm.get('about')?.value,
-      idUser: sessionStorage.getItem("userIdPortfolio")
+      idUser: parseInt(sessionStorage.getItem("userIdPortfolio") || "no-user")
     }
     this.eduService.crearDatosEducacion(education).subscribe();
 
     this.educationForm.reset();
-
 
     await Swal.fire({
       title: 'Creating and posting ⏳',
@@ -84,7 +105,7 @@ export class EducationPortfolioComponent implements OnInit {
     });
   }
 
-  close(){
+  close() {
     this.editEducation = 0;
   }
 

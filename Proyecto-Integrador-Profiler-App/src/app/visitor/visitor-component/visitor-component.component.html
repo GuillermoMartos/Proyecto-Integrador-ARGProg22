@@ -1,13 +1,11 @@
-
 <div class="main-visit">
     <div class="card" style="padding: 2em;">
         <h5>Users table</h5>
-        <p-table #dt2 [value]="data"
-            [rows]="7" [showCurrentPageReport]="true" [loading]="loading"
-            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-          
+        <p-table #dt2 [value]="data" [rows]="7" [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
             <ng-template pTemplate="header">
-         
+
                 <tr>
                     <th>Name</th>
                     <th>Position</th>
@@ -16,7 +14,7 @@
                 </tr>
                 <tr>
                     <th class="no-btn">
-                        <p-columnFilter type="text" field="name" ></p-columnFilter>
+                        <p-columnFilter type="text" field="name"></p-columnFilter>
                     </th>
                     <th>
                         <p-columnFilter type="text" field="position"></p-columnFilter>
@@ -29,7 +27,7 @@
             <ng-template pTemplate="body" let-persona>
                 <tr>
                     <td>
-                        <a href="/visit/{{persona.email}}">{{persona.name}}</a>
+                        <a href="/visit/{{persona.email}}?visit=true">{{persona.name}}</a>
                     </td>
                     <td>
                         {{persona.position}}
@@ -49,8 +47,6 @@
             </ng-template>
         </p-table>
     </div>
-</div>    
+</div>
 
 <button class="btn-log" routerLink="">go Home 🏠</button>
-
-

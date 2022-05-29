@@ -1,11 +1,14 @@
-<div *ngIf="!new_edu; else btnclose">
+<div class="check_log" *ngIf="!visitor">
 
-  <button class="btn-log" (click)="create()">ADD EDUCATION 🖍</button>
+  <div *ngIf="!new_edu; else btnclose">
+
+    <button class="btn-log" (click)="create()">ADD EDUCATION 🖍</button>
+  </div>
+
+  <ng-template #btnclose>
+    <button class="btn-log" (click)="create()">CLOSE ❌</button>
+  </ng-template>
 </div>
-
-<ng-template #btnclose>
-  <button class="btn-log" (click)="create()">CLOSE ❌</button>
-</ng-template>
 
 <div class="edu-content" *ngIf="new_edu">
   <form class="form-portfolio" [formGroup]="educationForm" (submit)="send()">
@@ -13,7 +16,8 @@
       <label>
         <h4>Title(*):</h4>
       </label>
-       <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off" formControlName="title"></textarea>
+      <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+        formControlName="title"></textarea>
     </div>
 
     <div class="input">
@@ -23,7 +27,8 @@
         </label>
         <span style="font-size: smaller; color: grey;">(max.255)</span>
       </div>
-      <textarea class="textarea resize-ta" name="about" id="about" autoComplete="off" formControlName="about"></textarea>
+      <textarea class="textarea resize-ta" name="about" id="about" autoComplete="off"
+        formControlName="about"></textarea>
     </div>
 
     <div class="input">
@@ -32,10 +37,10 @@
       </label>
       <input class="input" type="date" name="date_initial" id="date_initial" autoComplete="off"
         formControlName="date_initial" />
-        <label>
-          <h4>Date end:</h4>
-        </label>
-        <input class="input"  type="date"  name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
+      <label>
+        <h4>Date end:</h4>
+      </label>
+      <input class="input" type="date" name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
     </div>
 
     <div class="input">
@@ -45,7 +50,8 @@
       <label>
         <h4>Institution:</h4>
       </label>
-      <textarea class="textarea resize-ta" name="institution" id="institution" autoComplete="off" formControlName="institution"></textarea>
+      <textarea class="textarea resize-ta" name="institution" id="institution" autoComplete="off"
+        formControlName="institution"></textarea>
     </div>
 
     <div class="input">
@@ -53,8 +59,8 @@
         <h4>URL image:</h4>
       </label>
       <textarea class="textarea resize-ta" name="img_institution" id="img_institution" autoComplete="off"
-      formControlName="img_institution"></textarea>
-     
+        formControlName="img_institution"></textarea>
+
     </div>
     <button class="btn-portfolio" type="submit" [disabled]="!educationForm.valid">
       <h4>CREATE!</h4>
@@ -74,6 +80,9 @@
     <div class="circle">
       <span class="green box"></span>
     </div>
+    <div class="circle">
+      <span>EDUCATION</span>
+    </div>
     <span class="tool-text">
       {{item.title}}
     </span>
@@ -81,8 +90,10 @@
   <div class="card__content">
 
     <div class="card-content">
-      <button class="btn-portfolio" (click)="edit(item.idEducation, item)">Edit 🎨</button>
-      <button class="btn-portfolio" (click)="erase(item.idEducation)">Delete 🗑</button>
+      <div class="check_log" *ngIf="!visitor">
+        <button class="btn-portfolio" (click)="edit(item.idEducation, item)">Edit 🎨</button>
+        <button class="btn-portfolio" (click)="erase(item.idEducation)">Delete 🗑</button>
+      </div>
 
 
       <div class="edit-parent" *ngIf="item.idEducation==editEducation">
@@ -92,7 +103,8 @@
             <label>
               <h4>Title(*):</h4>
             </label>
-             <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off" formControlName="title"></textarea>
+            <textarea class="textarea resize-ta" name="title" id="title" autoComplete="off"
+              formControlName="title"></textarea>
           </div>
 
           <div class="input">
@@ -102,7 +114,8 @@
               </label>
               <span style="font-size: smaller;">{{255-editableForm.get('about')?.value.length}}/255</span>
             </div>
-            <textarea class="textarea resize-ta" name="about" id="about" autoComplete="off" formControlName="about"></textarea>
+            <textarea class="textarea resize-ta" name="about" id="about" autoComplete="off"
+              formControlName="about"></textarea>
           </div>
 
           <div class="input">
@@ -111,10 +124,11 @@
             </label>
             <input class="input" type="date" name="date_initial" id="date_initial" autoComplete="off"
               formControlName="date_initial" />
-              <label>
-                <h4>Date end:</h4>
-              </label>
-              <input class="input"  type="date"  name="date_end" id="date_end" autoComplete="off" formControlName="date_end" />
+            <label>
+              <h4>Date end:</h4>
+            </label>
+            <input class="input" type="date" name="date_end" id="date_end" autoComplete="off"
+              formControlName="date_end" />
           </div>
 
           <div class="input">
@@ -124,7 +138,8 @@
             <label>
               <h4>Institution:</h4>
             </label>
-            <textarea class="textarea resize-ta" name="institution" id="institution" autoComplete="off" formControlName="institution"></textarea>
+            <textarea class="textarea resize-ta" name="institution" id="institution" autoComplete="off"
+              formControlName="institution"></textarea>
           </div>
 
           <div class="input">
@@ -132,10 +147,10 @@
               <h4>URL image:</h4>
             </label>
             <textarea class="textarea resize-ta" name="img_institution" id="img_institution" autoComplete="off"
-            formControlName="img_institution"></textarea>
+              formControlName="img_institution"></textarea>
           </div>
 
-          
+
           <button class="btn-portfolio" type="submit" [disabled]="!editableForm.valid">
             <h4>UPDATE!</h4>
           </button>

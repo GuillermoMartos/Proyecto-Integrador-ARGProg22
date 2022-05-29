@@ -9,20 +9,20 @@ import { HttpRequestsService } from 'src/services/http-requests.service';
   styleUrls: ['./visitor-component.component.css']
 })
 export class VisitorComponentComponent implements OnInit {
-  data:any;
-  selectedUser:any=[];
-  representatives:any=[];
+  data: any;
+  selectedUser: any = [];
+  representatives: any = [];
   loading: boolean = true;
 
-  constructor(private http:HttpRequestsService) { }
+  constructor(private http: HttpRequestsService) { }
 
   ngOnInit(): void {
-    this.data=this.http.getUserAsVisitor().subscribe(data=>data.map(persona=>{
-      persona?.password?persona.password="key-protected":null;
-      this.data=data
+    this.data = this.http.getUserAsVisitor().subscribe(data => data.map(persona => {
+      persona?.password ? persona.password = "key-protected" : null;
+      this.data = data
     }))
 
   }
 
- 
+
 }

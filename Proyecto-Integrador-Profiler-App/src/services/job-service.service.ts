@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JobServiceService {
-  private url="http://localhost:8080/job/info"
+  visitorJobData:any[]=[];
+  private url="https://warm-depths-51075.herokuapp.com/job/info"
   constructor(private http:HttpClient) { }
 
 obtenerDatosJob(id:number):Observable<any[]>{
@@ -14,14 +15,22 @@ obtenerDatosJob(id:number):Observable<any[]>{
 }
 
 crearDatosJob(job:any):Observable<any[]>{
-  return this.http.post<any[]>("http://localhost:8080/job/create", job);
+  return this.http.post<any[]>("https://warm-depths-51075.herokuapp.com/job/create", job);
 }
 
 eliminarDatoJob(id:number):Observable<any[]>{ 
 
-  return this.http.delete<any[]>("http://localhost:8080/job/erase", {body:id});
+  return this.http.delete<any[]>("https://warm-depths-51075.herokuapp.com/job/erase", {body:id});
 }
 editarDatoJob(update:any):Observable<any[]>{
-  return this.http.put<any[]>("http://localhost:8080/job/update", update);
+  return this.http.put<any[]>("https://warm-depths-51075.herokuapp.com/job/update", update);
+}
+
+brindarJobVisitante(id:number): void {
+    this.http.post<any[]>(this.url, {id:id}).subscribe(data=> this.visitorJobData= data);
+}
+
+obtenerDatosJobVisitante():any[]{
+    return this.visitorJobData
 }
 }

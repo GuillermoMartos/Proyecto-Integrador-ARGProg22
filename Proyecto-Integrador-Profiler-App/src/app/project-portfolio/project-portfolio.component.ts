@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DateConverterService } from 'src/services/date-converter.service';
 import { ProjectServiceService } from 'src/services/project-service.service';
 import Swal from 'sweetalert2';
@@ -15,11 +16,22 @@ export class ProjectPortfolioComponent implements OnInit {
   projectData!: any[];
   new_project: boolean = false;
   editProject = 0
+  visitor: any = null;
 
-  constructor(private projectService: ProjectServiceService, private converter:DateConverterService) { }
+
+  constructor(private projectService: ProjectServiceService, private route: ActivatedRoute, private converter: DateConverterService) { }
 
   async ngOnInit(): Promise<void> {
-    await this.projectService.obtenerDatosProject(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.projectData = data)
+    if(sessionStorage.getItem("userIdPortfolio")==null){
+    
+          setTimeout(async ()=>{
+            this.projectData= await this.projectService.obtenerDatosProjectVisitante()  
+          },3000)
+          
+          this.visitor=true;
+          return
+        }
+        await this.projectService.obtenerDatosProject(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.projectData = data)
   }
 
 
@@ -87,7 +99,7 @@ export class ProjectPortfolioComponent implements OnInit {
   }
 
 
-  close(){
+  close() {
     this.editProject = 0;
   }
 

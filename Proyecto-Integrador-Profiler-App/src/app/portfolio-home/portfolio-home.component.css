@@ -13,6 +13,9 @@
     justify-self: center;
 }
 
+.info-base{
+    margin-bottom: 0.6em;
+}
 
 .first-div{
     margin: 0 auto;
@@ -86,6 +89,10 @@ h1>span{
     background-color: rgba(240, 248, 255, 0.568);
     border-radius: 1em;
     padding: 0em 0.5em
+}
+
+.photo-viewer{
+    align-self: center;
 }
 
 .no-log{

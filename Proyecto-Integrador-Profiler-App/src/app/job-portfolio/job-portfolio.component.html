@@ -1,11 +1,13 @@
-<div *ngIf="!new_job; else btnclose">
+<div class="check_log" *ngIf="!visitor">
+  <div *ngIf="!new_job; else btnclose">
 
-  <button class="btn-log" (click)="create()">ADD JOB 🖍</button>
+    <button class="btn-log" (click)="create()">ADD JOB 🖍</button>
+  </div>
+
+  <ng-template #btnclose>
+    <button class="btn-log" (click)="create()">CLOSE ❌</button>
+  </ng-template>
 </div>
-
-<ng-template #btnclose>
-  <button class="btn-log" (click)="create()">CLOSE ❌</button>
-</ng-template>
 
 <div *ngIf="new_job">
   <form class="form-portfolio" [formGroup]="jobForm" (submit)="send()">
@@ -21,13 +23,12 @@
       <label>
         <h4>Initial date(*):</h4>
       </label>
-      <input class="input" class="textarea resize-ta" type="date" name="initial_date" id="initial_date" autoComplete="off"
-        formControlName="initial_date"/>
+      <input class="input" class="textarea resize-ta" type="date" name="initial_date" id="initial_date"
+        autoComplete="off" formControlName="initial_date" />
       <label>
         <h4>End date:</h4>
       </label>
-      <input class="input" type="date" name="end_date" id="end_date" autoComplete="off"
-        formControlName="end_date"/>
+      <input class="input" type="date" name="end_date" id="end_date" autoComplete="off" formControlName="end_date" />
     </div>
 
     <div class="input">
@@ -72,14 +73,19 @@
     <div class="circle">
       <span class="green box"></span>
     </div>
+    <div class="circle">
+      <span>JOB</span>
+    </div>
     <span class="tool-text">
       {{item.title}}
     </span>
   </div>
   <div class="card__content">
     <div class="card-content">
-      <button class="btn-portfolio" (click)="edit(item.idJob, item)">Edit 🎨</button>
-      <button class="btn-portfolio" (click)="erase(item.idJob)">Delete 🗑</button>
+      <div class="check_log" *ngIf="!visitor">
+        <button class="btn-portfolio" (click)="edit(item.idJob, item)">Edit 🎨</button>
+        <button class="btn-portfolio" (click)="erase(item.idJob)">Delete 🗑</button>
+      </div>
 
 
       <div class="edit-job" *ngIf="item.idJob==editJob">
@@ -97,13 +103,13 @@
             <label>
               <h4>Initial date(*):</h4>
             </label>
-            <input class="input" class="textarea resize-ta" type="date" name="initial_date" id="initial_date" autoComplete="off"
-              formControlName="initial_date"/>
+            <input class="input" class="textarea resize-ta" type="date" name="initial_date" id="initial_date"
+              autoComplete="off" formControlName="initial_date" />
             <label>
               <h4>End date:</h4>
             </label>
             <input class="input" type="date" name="end_date" id="end_date" autoComplete="off"
-              formControlName="end_date"/>
+              formControlName="end_date" />
           </div>
 
           <div class="input">

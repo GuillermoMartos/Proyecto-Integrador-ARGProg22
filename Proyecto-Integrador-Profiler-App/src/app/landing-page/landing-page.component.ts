@@ -13,6 +13,7 @@ export class LandingPageComponent implements OnInit {
   title = 'Landing-Profiler-App';
   response:any;
   ngOnInit(): void {
+    sessionStorage.clear()
   }
 
   registrationForm = new FormGroup({

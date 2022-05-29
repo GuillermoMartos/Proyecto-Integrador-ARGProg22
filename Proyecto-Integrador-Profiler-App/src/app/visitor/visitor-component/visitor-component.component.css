@@ -1,5 +1,16 @@
 .main-visit{
-    min-height: 90vh;
+    min-height: 70vh;
     display: flex;
 }
 
+button{
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    left:0;
+    color:white;
+    background-color: black;
+    border: none;
+    /* font-size: 2em; */
+    opacity: 70%;
+}

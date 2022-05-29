@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpRequestsService } from 'src/services/http-requests.service';
 import Swal from 'sweetalert2';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class PortfolioHomeComponent implements OnInit {
   user_logged:any;
   user_edit: boolean = false;
 
-  constructor( private http: HttpRequestsService, private router:Router ) {
+  constructor( private http: HttpRequestsService, private router:Router, private clipboard: Clipboard ) {
     this.user_logged=this.router.getCurrentNavigation()?.extras.state
   }
 
@@ -27,6 +28,7 @@ export class PortfolioHomeComponent implements OnInit {
     about: new FormControl(null, [Validators.maxLength(255)]),
     adress: new FormControl,
     password: new FormControl(null, [Validators.required]),
+    img: new FormControl,
   });
   
   ngOnInit() {
@@ -44,7 +46,8 @@ export class PortfolioHomeComponent implements OnInit {
       phone: this.user_logged?.phone,
       about: this.user_logged?.about,
       adress: this.user_logged?.adress,
-      password: null
+      password: null,
+      img: this.user_logged?.img,
     });
   }
 
@@ -63,10 +66,8 @@ export class PortfolioHomeComponent implements OnInit {
       phone: this.portfolioForm.get('phone')?.value,
       email: this.portfolioForm.get('email')?.value,
       password: this.portfolioForm.get('password')?.value,
-      img: this.user_logged.img,
+      img: this.portfolioForm.get('img')?.value,
     }
-    console.log(this.user_logged)
-    console.log(this.portfolioForm.get('password')?.value)
 
     if(this.portfolioForm.get('password')?.value!==this.user_logged.password){ 
       Swal.fire("Password wrong","must access password for user info change");
@@ -88,7 +89,9 @@ export class PortfolioHomeComponent implements OnInit {
     this.user_edit=!this.user_edit
   }
 
-
+  shareLink(){
+    this.clipboard.copy(`http://localhost:4200/visit/${this.user_logged.email}?visit=true`)
+    Swal.fire('Copied to clipboard!', 'you may share it now')
+  }
  
-
 }

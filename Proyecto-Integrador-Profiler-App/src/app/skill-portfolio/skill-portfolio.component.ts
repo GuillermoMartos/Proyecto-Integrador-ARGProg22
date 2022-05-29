@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { SkillServiceService } from 'src/services/skill-service.service';
 import Swal from 'sweetalert2';
 
@@ -13,10 +14,21 @@ export class SkillPortfolioComponent implements OnInit {
   skillData!: any[];
   new_skill: boolean = false;
   editSkill = 0
+  visitor: any = null;
 
-  constructor( private skillService: SkillServiceService) { }
+
+  constructor(private skillService: SkillServiceService, private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
+    if(sessionStorage.getItem("userIdPortfolio")==null){
+    
+      setTimeout(async ()=>{
+        this.skillData= await this.skillService.obtenerDatosSkillVisitante()  
+      },3000)
+      
+      this.visitor=true;
+      return
+    }
     await this.skillService.obtenerDatosSkill(parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")).subscribe(data => this.skillData = data)
   }
 
@@ -45,7 +57,7 @@ export class SkillPortfolioComponent implements OnInit {
       qualification: this.skillForm.get('qualification')?.value,
       type: this.skillForm.get('type')?.value,
       about_skill: this.skillForm.get('about_skill')?.value,
-      idUser: parseInt(sessionStorage.getItem("userIdPortfolio")||"no user")
+      idUser: parseInt(sessionStorage.getItem("userIdPortfolio") || "no user")
     }
 
     this.skillService.crearDatosSkill(skill).subscribe();
@@ -77,14 +89,14 @@ export class SkillPortfolioComponent implements OnInit {
     });
   }
 
-  close(){
+  close() {
     this.editSkill = 0;
   }
 
   async update(data: any) {
-   
+
     let update = {
-      idSkill: data,      
+      idSkill: data,
       title: this.editableForm.get('title')?.value,
       qualification: this.editableForm.get('qualification')?.value,
       type: this.editableForm.get('type')?.value,
