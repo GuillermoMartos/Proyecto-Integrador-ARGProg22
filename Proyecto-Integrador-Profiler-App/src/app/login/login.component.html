@@ -1,80 +1,58 @@
+<div *ngIf="user==false; else elseBlock" class="nav">
+  <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa"
+    target="_blank">
+    <img class="logo" alt="logo" src="https://www.argentina.gob.ar/sites/default/files/untitled-3-01_2.png"
+      width="100px" />
+  </a>
 
-  
-  <div *ngIf="user==false; else elseBlock" class="nav">
-    <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa" target="_blank">
-      <img
-        class="logo"
-        alt="logo"
-        src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1645227242/APLogo-20-20.png"
-        width="100px"
-      />
-    </a>
-  
-      
-      <div class="Log" >
-  
-        <form  class="form" [formGroup]="loginForm" (submit)="login()">
-          
-          <label>
-            <h4>User e-mail:</h4>
-          </label>
-  
-          <input
-            class="input"
-            name="username"
-            value={log.username}
-            id="email"
-            autoComplete="off"
-            formControlName="email"
-          />
-  
-          <label>
-            <h4>Password</h4>
-          </label>
-  
-          <input
-            class="input"
-            name="password"
-            type="password"
-            id="password"
-            value={log.password}
-            autoComplete="off"
-            formControlName="password"
-          />
-          <!-- <button class="btn-login" type="submit">
+
+  <div class="Log">
+
+    <form class="form" [formGroup]="loginForm" (submit)="login()">
+
+      <label>
+        <h4>User e-mail:</h4>
+      </label>
+
+      <input class="input" name="username" value={log.username} id="email" autoComplete="off" formControlName="email" />
+
+      <label>
+        <h4>Password</h4>
+      </label>
+
+      <input class="input" name="password" type="password" id="password" value={log.password} autoComplete="off"
+        formControlName="password" />
+      <!-- <button class="btn-login" type="submit">
             <h4>LOG IN</h4>
           </button> -->
-          <button class="btn draw-border">Log In</button>
-          
-        </form>
-      </div>
-    </div>
-  
-    <ng-template #elseBlock>
-      <div class="nav">
-        
-     
-          <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa" target="_blank">
-            <img
-              class="logo"
-              alt="logo"
-              src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1645227242/APLogo-20-20.png"
-              width="100px"
-            />
-          </a>
-  
-         
-  
-         <div class="Log">
+      <button class="btn draw-border">Log In</button>
 
-          <button class="btn draw-border"  type="submit" (click)="logout()">Log Out</button>
-           <!-- <button class="btn-login" type="submit" (click)="logout()">
+    </form>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <div class="nav">
+
+
+    <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa"
+      target="_blank">
+      <img class="logo" alt="logo"
+        src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1645227242/APLogo-20-20.png"
+        width="100px" />
+    </a>
+
+
+
+    <div class="Log">
+
+      <button class="btn draw-border" type="submit" (click)="logout()">Log Out</button>
+      <!-- <button class="btn-login" type="submit" (click)="logout()">
              <h4></h4>
            </button> -->
-         </div>
-              
-         
-         
-        </div>
-    </ng-template>
+    </div>
 
+
+
+  </div>
+</ng-template>
